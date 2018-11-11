@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomataNETjuegos.Contratos", "AutomataNETjuegos\AutomataNETjuegos.Contratos.csproj", "{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomataNETjuegos.Logica", "AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj", "{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomataNETjuegos.Logica.Tests", "AutomataNETjuegos.Logica.Tests\AutomataNETjuegos.Logica.Tests.csproj", "{D73C18E7-0B33-4921-AE7F-7A3E94D2FDE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomataNETjuegos.Visor", "AutomataNETjuegos.Visor\AutomataNETjuegos.Visor.csproj", "{5581947A-7B25-43B7-9DD0-8AE949335054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomataNETjuegos.JugadorManual", "AutomataNETjuegos.JugadorManual\AutomataNETjuegos.JugadorManual.csproj", "{41857513-2DAB-4D14-9269-CAED0972F997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomataNETjuegos.Fabrica", "AutomataNETjuegos.Fabrica\AutomataNETjuegos.Fabrica.csproj", "{5EF72420-1562-4838-BEF1-9EA35F5F9E04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73C18E7-0B33-4921-AE7F-7A3E94D2FDE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73C18E7-0B33-4921-AE7F-7A3E94D2FDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73C18E7-0B33-4921-AE7F-7A3E94D2FDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73C18E7-0B33-4921-AE7F-7A3E94D2FDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5581947A-7B25-43B7-9DD0-8AE949335054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5581947A-7B25-43B7-9DD0-8AE949335054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5581947A-7B25-43B7-9DD0-8AE949335054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5581947A-7B25-43B7-9DD0-8AE949335054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41857513-2DAB-4D14-9269-CAED0972F997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41857513-2DAB-4D14-9269-CAED0972F997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41857513-2DAB-4D14-9269-CAED0972F997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41857513-2DAB-4D14-9269-CAED0972F997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF72420-1562-4838-BEF1-9EA35F5F9E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF72420-1562-4838-BEF1-9EA35F5F9E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF72420-1562-4838-BEF1-9EA35F5F9E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF72420-1562-4838-BEF1-9EA35F5F9E04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B61A17E3-CC98-42F4-8C98-BA1BAA0158D8}
+	EndGlobalSection
+EndGlobal

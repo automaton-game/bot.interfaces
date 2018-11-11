@@ -1,0 +1,9 @@
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\bin\Debug\AutomataNETjuegos.JugadorManual.dll
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\bin\Debug\AutomataNETjuegos.JugadorManual.pdb
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\bin\Debug\AutomataNETjuegos.Contratos.dll
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\bin\Debug\AutomataNETjuegos.Contratos.pdb
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\obj\Debug\AutomataNETjuegos.JugadorManual.csprojResolveAssemblyReference.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\obj\Debug\AutomataNETjuegos.JugadorManual.csproj.CoreCompileInputs.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\obj\Debug\AutomataNETjuegos.JugadorManual.csproj.CopyComplete
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\obj\Debug\AutomataNETjuegos.JugadorManual.dll
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.JugadorManual\obj\Debug\AutomataNETjuegos.JugadorManual.pdb

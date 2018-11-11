@@ -1,0 +1,9 @@
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard1.0\AutomataNETjuegos.Contratos.deps.json
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard1.0\AutomataNETjuegos.Contratos.dll
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard1.0\AutomataNETjuegos.Contratos.pdb
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.csproj.CoreCompileInputs.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.AssemblyInfoInputs.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.AssemblyInfo.cs
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.dll
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.pdb
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard1.0\AutomataNETjuegos.Contratos.csprojResolveAssemblyReference.cache

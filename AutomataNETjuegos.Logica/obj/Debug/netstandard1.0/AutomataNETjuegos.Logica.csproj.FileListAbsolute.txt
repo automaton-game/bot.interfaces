@@ -1,0 +1,4 @@
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.Logica\obj\Debug\netstandard1.0\AutomataNETjuegos.Logica.csprojResolveAssemblyReference.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.Logica\obj\Debug\netstandard1.0\AutomataNETjuegos.Logica.csproj.CoreCompileInputs.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.Logica\obj\Debug\netstandard1.0\AutomataNETjuegos.Logica.AssemblyInfoInputs.cache
+C:\Users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos.Logica\obj\Debug\netstandard1.0\AutomataNETjuegos.Logica.AssemblyInfo.cs
