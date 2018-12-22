@@ -1,9 +1,0 @@
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard2.0\AutomataNETjuegos.Contratos.deps.json
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard2.0\AutomataNETjuegos.Contratos.dll
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\bin\Debug\netstandard2.0\AutomataNETjuegos.Contratos.pdb
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.csprojResolveAssemblyReference.cache
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.csproj.CoreCompileInputs.cache
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.AssemblyInfoInputs.cache
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.AssemblyInfo.cs
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.dll
-c:\users\hlavrencic\source\repos\AutomataNETjuegos\AutomataNETjuegos\obj\Debug\netstandard2.0\AutomataNETjuegos.Contratos.pdb

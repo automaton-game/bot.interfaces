@@ -38,6 +38,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj">
+      <Project>{e9aa6a2a-3d39-43dc-b811-5e0187b42d3d}</Project>
+      <Name>AutomataNETjuegos.Contratos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutomataNETjuegos.JugadorManual\AutomataNETjuegos.JugadorManual.csproj">
       <Project>{41857513-2DAB-4D14-9269-CAED0972F997}</Project>
       <Name>AutomataNETjuegos.JugadorManual</Name>
@@ -45,10 +49,6 @@
     <ProjectReference Include="..\AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj">
       <Project>{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}</Project>
       <Name>AutomataNETjuegos.Logica</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AutomataNETjuegos\AutomataNETjuegos.Contratos.csproj">
-      <Project>{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}</Project>
-      <Name>AutomataNETjuegos.Contratos</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,8 +41,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutomataNETjuegos\AutomataNETjuegos.Contratos.csproj">
-      <Project>{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}</Project>
+    <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj">
+      <Project>{e9aa6a2a-3d39-43dc-b811-5e0187b42d3d}</Project>
       <Name>AutomataNETjuegos.Contratos</Name>
     </ProjectReference>
   </ItemGroup>

@@ -3712,8 +3712,8 @@
     },
     "AutomataNETjuegos.Contratos/1.0.0": {
       "type": "project",
-      "path": "../AutomataNETjuegos/AutomataNETjuegos.Contratos.csproj",
-      "msbuildProject": "../AutomataNETjuegos/AutomataNETjuegos.Contratos.csproj"
+      "path": "../AutomataNETjuegos.Contratos/AutomataNETjuegos.Contratos.csproj",
+      "msbuildProject": "../AutomataNETjuegos.Contratos/AutomataNETjuegos.Contratos.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3729,11 +3729,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica\\AutomataNETjuegos.Logica.csproj",
+      "projectUniqueName": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica\\AutomataNETjuegos.Logica.csproj",
       "projectName": "AutomataNETjuegos.Logica",
-      "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica\\AutomataNETjuegos.Logica.csproj",
+      "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica\\AutomataNETjuegos.Logica.csproj",
       "packagesPath": "C:\\Users\\hlavrencic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica\\obj\\",
+      "outputPath": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3753,8 +3753,8 @@
       "frameworks": {
         "netstandard1.3": {
           "projectReferences": {
-            "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos\\AutomataNETjuegos.Contratos.csproj": {
-              "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos\\AutomataNETjuegos.Contratos.csproj"
+            "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Contratos\\AutomataNETjuegos.Contratos.csproj": {
+              "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Contratos\\AutomataNETjuegos.Contratos.csproj"
             }
           }
         }

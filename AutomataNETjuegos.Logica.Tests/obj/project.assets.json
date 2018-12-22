@@ -5727,11 +5727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica.Tests\\AutomataNETjuegos.Logica.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica.Tests\\AutomataNETjuegos.Logica.Tests.csproj",
       "projectName": "AutomataNETjuegos.Logica.Tests",
-      "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica.Tests\\AutomataNETjuegos.Logica.Tests.csproj",
+      "projectPath": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica.Tests\\AutomataNETjuegos.Logica.Tests.csproj",
       "packagesPath": "C:\\Users\\hlavrencic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hlavrencic\\source\\repos\\AutomataNETjuegos\\AutomataNETjuegos.Logica.Tests\\obj\\",
+      "outputPath": "C:\\Users\\hlavrencic\\source\\repos\\Automaton\\AutomataNETjuegos.Logica.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

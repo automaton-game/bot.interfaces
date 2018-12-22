@@ -74,6 +74,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj">
+      <Project>{e9aa6a2a-3d39-43dc-b811-5e0187b42d3d}</Project>
+      <Name>AutomataNETjuegos.Contratos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutomataNETjuegos.Fabrica\AutomataNETjuegos.Fabrica.csproj">
       <Project>{5EF72420-1562-4838-BEF1-9EA35F5F9E04}</Project>
       <Name>AutomataNETjuegos.Fabrica</Name>
@@ -85,10 +89,6 @@
     <ProjectReference Include="..\AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj">
       <Project>{F9BCA978-DEBF-4C54-8930-8FE5ABF6ED7F}</Project>
       <Name>AutomataNETjuegos.Logica</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AutomataNETjuegos\AutomataNETjuegos.Contratos.csproj">
-      <Project>{83B6FC2B-4AA2-4293-8EA6-7E9504E9B2EE}</Project>
-      <Name>AutomataNETjuegos.Contratos</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
