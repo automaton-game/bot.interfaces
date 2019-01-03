@@ -17,7 +17,6 @@ bin/
 Bin/
 obj/
 Obj/
-*.js
 .vs/
 .git/
 *.user
