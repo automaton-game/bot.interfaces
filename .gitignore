@@ -20,3 +20,4 @@ Obj/
 *.js
 .vs/
 .git/
+*.user
