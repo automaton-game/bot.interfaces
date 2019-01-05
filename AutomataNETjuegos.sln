@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomataNETjuegos.Fabrica",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomataNETjuegos.Contratos", "AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj", "{E9AA6A2A-3D39-43DC-B811-5E0187B42D3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomataNETjuegos.Web", "AutomataNETjuegos.Web\AutomataNETjuegos.Web.csproj", "{554D58F3-BE51-4DA6-AF05-52C73D562DAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E9AA6A2A-3D39-43DC-B811-5E0187B42D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9AA6A2A-3D39-43DC-B811-5E0187B42D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9AA6A2A-3D39-43DC-B811-5E0187B42D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554D58F3-BE51-4DA6-AF05-52C73D562DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554D58F3-BE51-4DA6-AF05-52C73D562DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554D58F3-BE51-4DA6-AF05-52C73D562DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554D58F3-BE51-4DA6-AF05-52C73D562DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
