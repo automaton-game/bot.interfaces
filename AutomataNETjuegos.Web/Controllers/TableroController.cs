@@ -19,6 +19,13 @@ namespace AutomataNETjuegos.Web.Controllers
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Tablero, Models.Tablero>();
+
+                cfg.CreateMap<FilaTablero, Models.FilaTablero>();
+
+                cfg.CreateMap<Casillero, Models.Casillero>()
+                    .ForMember(m => m.Muralla, y => y.MapFrom(m => m.Muralla != null ? (int?)m.Muralla.GetHashCode() : null))
+                    .ForMember(m => m.Robot, y => y.MapFrom(m => m.Robot != null ? (int?)m.Robot.GetHashCode() : null))
+                    ;
             });
 
             var mapper = config.CreateMapper();
