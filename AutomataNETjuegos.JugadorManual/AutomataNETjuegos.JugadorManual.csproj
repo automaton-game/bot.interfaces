@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRobotInput.cs" />
+    <Compile Include="RobotDefensivo.cs" />
     <Compile Include="RobotInputBox.cs" />
     <Compile Include="RobotManual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

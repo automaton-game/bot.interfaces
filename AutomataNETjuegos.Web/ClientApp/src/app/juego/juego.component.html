@@ -1,7 +1,9 @@
 <h1>Juego</h1>
 
 <div>
-  <div *ngFor="let fila in filas"> <juego-fila-component></juego-fila-component></div>
+  <div *ngFor="let fila of filas">
+    <juego-fila-component [datosFila]="fila"></juego-fila-component>
+  </div>
   
 </div>
 

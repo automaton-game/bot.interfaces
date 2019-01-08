@@ -13,15 +13,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\juego\modelos\casillero.ts" />
+    <None Remove="ClientApp\src\app\juego\modelos\filaTablero.ts" />
+    <None Remove="ClientApp\src\app\juego\modelos\robot.ts" />
+    <None Remove="ClientApp\src\app\juego\modelos\tablero.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj" />
+    <ProjectReference Include="..\AutomataNETjuegos.JugadorManual\AutomataNETjuegos.JugadorManual.csproj" />
+    <ProjectReference Include="..\AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\casillero.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\filaTablero.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\tablero.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\robot.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

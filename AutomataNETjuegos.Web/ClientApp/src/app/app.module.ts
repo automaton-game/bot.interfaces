@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { JuegoComponent } from './juego/juego.component';
 import { FilaComponent } from './juego/fila/fila.component';
+import { CeldaComponent } from './juego/celda/celda.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FilaComponent } from './juego/fila/fila.component';
     CounterComponent,
     FetchDataComponent,
     JuegoComponent,
-    FilaComponent
+    FilaComponent,
+    CeldaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
