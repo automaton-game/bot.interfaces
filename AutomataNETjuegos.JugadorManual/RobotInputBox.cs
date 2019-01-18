@@ -1,9 +1,12 @@
-﻿using AutomataNETjuegos.Contratos.Robots;
+﻿using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Robots;
 
 namespace AutomataNETjuegos.JugadorManual
 {
     public class RobotInputBox : IRobot
     {
+        public Tablero Tablero { get; set; }
+
         public AccionRobotDto GetAccionRobot()
         {
             var input = Microsoft.VisualBasic.Interaction.InputBox("MovimientoRobot");

@@ -1,6 +1,7 @@
 ﻿
 using AutomataNETjuegos.JugadorManual;
 using AutomataNETjuegos.Logica;
+using System;
 
 namespace AutomataNETjuegos.Fabrica
 {
@@ -15,8 +16,9 @@ namespace AutomataNETjuegos.Fabrica
 
         public IJuego2v2 Crear()
         {
-            var juego = new Juego2v2(new FabricaTablero(), new[] { new RobotManual(robotInput), new RobotManual(robotInput) });
-            return juego;
+            throw new NotImplementedException();
+            //var juego = new Juego2v2(new FabricaTablero(), new[] { new RobotManual(robotInput), new RobotManual(robotInput) });
+            //return juego;
         }
     }
 }

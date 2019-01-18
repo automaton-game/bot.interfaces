@@ -61,7 +61,7 @@ namespace AutomataNETjuegos.Logica
             if (!iniciado)
             {
                 iniciado = true;
-                this.juego.Iniciar();
+                //this.juego.Iniciar();
                 plataformaVisual.Dibujar(this.juego.Tablero);
             }
         }

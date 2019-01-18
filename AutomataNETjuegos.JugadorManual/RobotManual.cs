@@ -1,4 +1,5 @@
-﻿using AutomataNETjuegos.Contratos.Robots;
+﻿using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Robots;
 
 namespace AutomataNETjuegos.JugadorManual
 {
@@ -10,6 +11,8 @@ namespace AutomataNETjuegos.JugadorManual
         {
             this.robotInput = robotInput;
         }
+
+        public Tablero Tablero { get; set; }
 
         public AccionRobotDto GetAccionRobot()
         {

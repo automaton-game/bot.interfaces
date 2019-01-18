@@ -1,5 +1,6 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Contratos.Robots;
+using System;
 using System.Collections.Generic;
 
 namespace AutomataNETjuegos.Logica
@@ -8,7 +9,7 @@ namespace AutomataNETjuegos.Logica
     {
         Tablero Tablero { get; }
 
-        void Iniciar();
+        void Iniciar(IList<Type> robotTypes);
 
         bool JugarTurno();
 

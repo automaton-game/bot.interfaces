@@ -26,7 +26,7 @@ namespace AutomataNETjuegos.Visor
             InitializeComponent();
             juego = new FabricaJuego(this).Crear();
             jugadores = juego.GetJugadores().ToArray();
-            juego.Iniciar();
+            juego.Iniciar(new[] { typeof(JugadorManual.RobotDefensivo), typeof(JugadorManual.RobotDefensivo) });
             Dibujar();
         }
 

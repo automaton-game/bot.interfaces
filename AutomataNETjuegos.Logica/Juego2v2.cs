@@ -10,24 +10,35 @@ namespace AutomataNETjuegos.Logica
     public class Juego2v2 : IJuego2v2
     {
         private readonly IFabricaTablero fabricaTablero;
-        private readonly IEnumerable<IRobot> robots;
-        
-        private Tablero tablero;
+        private readonly IFabricaRobot fabricaRobot;
+
+        private IList<IRobot> robots;
         private IRobot robotJugado;
+        private Tablero tablero;
 
         public Juego2v2(
             IFabricaTablero fabricaTablero,
-            IEnumerable<IRobot> robots)
+            IFabricaRobot fabricaRobot
+            )
         {
             this.fabricaTablero = fabricaTablero;
-            this.robots = robots;
+            this.fabricaRobot = fabricaRobot;
         }
 
         public Tablero Tablero { get; private set; }
 
-        public void Iniciar()
+        public void Iniciar(IList<Type> robotTypes)
         {
             this.tablero = fabricaTablero.Crear();
+
+            var robots = robotTypes.Select(t => {
+                var r = fabricaRobot.ObtenerRobot(t);
+                r.Tablero = tablero;
+                return r;
+            }).ToArray();
+
+            this.robots = robots;
+
             this.Tablero = this.tablero;
             this.tablero.Filas.First().Casilleros.First().Robot = robots.First();
             this.tablero.Filas.Last().Casilleros.Last().Robot = robots.Last();
