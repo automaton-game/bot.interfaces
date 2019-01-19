@@ -45,6 +45,11 @@ namespace AutomataNETjuegos.Web.Controllers
 
         private IEnumerable<Models.Tablero> GetTableros(IMapper mapper, IJuego2v2 juego)
         {
+            {
+                var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
+                yield return tablero;
+            }
+            
             while (juego.JugarTurno())
             {
                 var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
