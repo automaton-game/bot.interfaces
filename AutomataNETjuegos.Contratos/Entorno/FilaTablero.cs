@@ -7,5 +7,7 @@ namespace AutomataNETjuegos.Contratos.Entorno
         public int NroFila { get; set; }
 
         public IList<Casillero> Casilleros { get; set; }
+
+        public Tablero Tablero { get; set; }
     }
 }

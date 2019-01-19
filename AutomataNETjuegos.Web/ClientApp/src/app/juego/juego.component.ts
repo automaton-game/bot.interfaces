@@ -13,7 +13,7 @@ export class JuegoComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero').subscribe(result => {
-      this.filas = result[0].filas;
+      this.filas = result[result.length-1].filas;
     }, error => console.error(error));
   }
 

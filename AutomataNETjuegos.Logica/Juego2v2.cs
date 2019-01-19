@@ -1,4 +1,5 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Contratos.Robots;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,7 @@ namespace AutomataNETjuegos.Logica
 
             robotJugado = robot;
 
-            return false;
+            return true;
         }
 
         public IEnumerable<IRobot> GetJugadores()
@@ -89,7 +90,7 @@ namespace AutomataNETjuegos.Logica
 
         private Casillero ObtenerPosicion(IRobot robot)
         {
-            return this.tablero.Filas.SelectMany(f => f.Casilleros).FirstOrDefault(c => c.Robot == robot);
+            return this.tablero.GetPosition(robot);
         }
 
         private Casillero Desplazar(Casillero casilleroOrigen, DireccionEnum movimiento)

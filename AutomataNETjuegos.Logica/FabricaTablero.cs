@@ -14,7 +14,8 @@ namespace AutomataNETjuegos.Logica
             tablero.Filas = Enumerable.Range(1, filas).Select(f => {
                 var fila = new FilaTablero
                 {
-                    NroFila = f
+                    NroFila = f,
+                    Tablero = tablero
                 };
 
                 fila.Casilleros = Enumerable.Range(1, columnas).Select(c => new Casillero { Fila = fila, NroFila = f, NroColumna = c }).ToArray();

@@ -1,5 +1,8 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Contratos.Robots;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AutomataNETjuegos.JugadorManual
@@ -10,8 +13,61 @@ namespace AutomataNETjuegos.JugadorManual
 
         public AccionRobotDto GetAccionRobot()
         {
-            
-            return new AccionConstruirDto() { };
+            var casillero = this.GetPosition(Tablero);
+
+            if (casillero.Muralla == null)
+            {
+                return new AccionConstruirDto() { };
+            }
+
+            var direcciones = new List<DireccionEnum>();
+
+            var direccion = GenerarDireccionAleatoria(direcciones);
+            var movimiento = EvaluarMovimiento(casillero, direccion);
+            while (movimiento == null)
+            {
+                direcciones.Add(direccion);
+                if (direcciones.Count >= 4)
+                {
+                    return null;
+                }
+
+                direccion = GenerarDireccionAleatoria(direcciones);
+                movimiento = EvaluarMovimiento(casillero, direccion);
+            }
+
+            return movimiento;
+        }
+
+        private AccionMoverDto EvaluarMovimiento(Casillero casillero, DireccionEnum direccion)
+        {
+            var relativo = casillero.BuscarRelativo(direccion);
+            if (relativo != null)
+            {
+                if (relativo.Muralla == null && relativo.Robot == null)
+                {
+                    return new AccionMoverDto() { Direccion = direccion };
+                }
+            }
+
+            return null;
+        }
+
+        private DireccionEnum GenerarDireccionAleatoria()
+        {
+            var random = new Random().Next(0,4);
+            return (DireccionEnum)random;
+        }
+
+        private DireccionEnum GenerarDireccionAleatoria(IList<DireccionEnum> evitar)
+        {
+            var obtenido = GenerarDireccionAleatoria();
+            while (evitar.Contains(obtenido))
+            {
+                obtenido = GenerarDireccionAleatoria();
+            }
+
+            return obtenido;
         }
     }
 }

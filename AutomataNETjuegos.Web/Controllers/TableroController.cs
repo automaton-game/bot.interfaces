@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using AutomataNETjuegos.Web.WebTools;
 using System;
+using System.Linq;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -25,8 +26,6 @@ namespace AutomataNETjuegos.Web.Controllers
         {
             var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot(serviceProvider));
             juego.Iniciar(new[] { typeof(RobotDefensivo), typeof(RobotDefensivo) });
-            juego.JugarTurno();
-            juego.JugarTurno();
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Tablero, Models.Tablero>();
@@ -41,9 +40,16 @@ namespace AutomataNETjuegos.Web.Controllers
 
             var mapper = config.CreateMapper();
 
-            var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
+            return GetTableros(mapper, juego);
+        }
 
-            return new[] { tablero };
+        private IEnumerable<Models.Tablero> GetTableros(IMapper mapper, IJuego2v2 juego)
+        {
+            while (juego.JugarTurno())
+            {
+                var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
+                yield return tablero;
+            }
         }
     }
 }
