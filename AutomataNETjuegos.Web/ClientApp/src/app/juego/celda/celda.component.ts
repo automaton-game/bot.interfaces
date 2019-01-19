@@ -9,14 +9,13 @@ import { Casillero } from '../modelos/casillero';
 export class CeldaComponent {
   @Input() casillero: Casillero;
 
-  public getColor() {
+  public getColor(hashId: string) {
     var hashId = this.casillero.muralla || this.casillero.robot;
     if (hashId) {
       return "#" + this.intToRGB(this.hashCode(hashId));
     } else {
       return "#FFF";
     }
-    
   }
 
   private hashCode(str) { // java String#hashCode
