@@ -5,7 +5,9 @@
     <juego-fila-component [datosFila]="fila"></juego-fila-component>
   </div>
   <div>
-
+    <label for="customRange1">Example range</label>
+    <input type="range" class="custom-range" id="customRange1" min="0" max="{{max}}" [(ngModel)]="actual" (change)="actualizarTablero()">
+    <p>Valor actual: <b>{{actual}}</b></p>
   </div>
   
 </div>

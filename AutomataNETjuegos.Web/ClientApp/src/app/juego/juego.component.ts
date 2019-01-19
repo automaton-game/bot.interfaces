@@ -8,16 +8,29 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './juego.component.html',  
 })
 export class JuegoComponent implements OnInit {
-  
-  public filas: Array<FilaTablero>;
 
-  ngOnInit(): void {
-    this.http.get<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero').subscribe(result => {
-      this.filas = result[result.length-1].filas;
-    }, error => console.error(error));
-  }
+  private tableros: Tablero[];
+
+  public filas: Array<FilaTablero>;
+  public max: number;
+  public actual: number;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     
   }
+
+  actualizarTablero() {
+    this.filas = this.tableros[this.actual].filas;
+  }
+
+  ngOnInit(): void {
+    this.http.get<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero').subscribe(result => {
+      this.max = result.length - 1;
+      this.actual = this.max;
+
+      this.tableros = result;
+      this.actualizarTablero();
+    }, error => console.error(error));
+  }
+
 }
