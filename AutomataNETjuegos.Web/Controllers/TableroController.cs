@@ -1,12 +1,12 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Logica;
 using Microsoft.AspNetCore.Mvc;
-using AutomataNETjuegos.JugadorManual;
 using System.Collections.Generic;
 using AutoMapper;
 using AutomataNETjuegos.Web.WebTools;
 using System;
 using System.Linq;
+using AutomataNETjuegos.Robots;
 
 namespace AutomataNETjuegos.Web.Controllers
 {

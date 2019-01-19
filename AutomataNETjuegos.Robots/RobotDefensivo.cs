@@ -3,9 +3,8 @@ using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Contratos.Robots;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace AutomataNETjuegos.JugadorManual
+namespace AutomataNETjuegos.Robots
 {
     public class RobotDefensivo : IRobot
     {

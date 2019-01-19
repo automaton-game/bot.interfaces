@@ -10,6 +10,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>e0c0190b-81de-4336-bc4b-4fc7255e021f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,8 +36,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj" />
-    <ProjectReference Include="..\AutomataNETjuegos.JugadorManual\AutomataNETjuegos.JugadorManual.csproj" />
     <ProjectReference Include="..\AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj" />
+    <ProjectReference Include="..\AutomataNETjuegos.Robots\AutomataNETjuegos.Robots.csproj" />
   </ItemGroup>
 
   <ItemGroup>

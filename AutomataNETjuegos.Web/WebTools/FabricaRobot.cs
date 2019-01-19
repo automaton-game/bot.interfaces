@@ -1,6 +1,6 @@
 ﻿using AutomataNETjuegos.Contratos.Robots;
-using AutomataNETjuegos.JugadorManual;
 using AutomataNETjuegos.Logica;
+using AutomataNETjuegos.Robots;
 using System;
 
 namespace AutomataNETjuegos.Web.WebTools
