@@ -33,7 +33,6 @@ namespace AutomataNETjuegos.Web.Controllers
         [HttpPost("[action]")]
         public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
         {
-            //var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
             juego.Iniciar(tableroRequest.LogicasRobot);
 
             return GetTableros();

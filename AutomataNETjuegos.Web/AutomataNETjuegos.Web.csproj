@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutomataNETjuegos.Compilador\AutomataNETjuegos.Compilador.csproj" />
     <ProjectReference Include="..\AutomataNETjuegos.Contratos\AutomataNETjuegos.Contratos.csproj" />
     <ProjectReference Include="..\AutomataNETjuegos.Logica\AutomataNETjuegos.Logica.csproj" />
     <ProjectReference Include="..\AutomataNETjuegos.Robots\AutomataNETjuegos.Robots.csproj" />
