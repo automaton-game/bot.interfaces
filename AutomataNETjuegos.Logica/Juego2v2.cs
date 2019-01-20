@@ -28,6 +28,23 @@ namespace AutomataNETjuegos.Logica
 
         public Tablero Tablero { get; private set; }
 
+        public void Iniciar(IList<string> robotLogics)
+        {
+            this.tablero = fabricaTablero.Crear();
+
+            var robots = robotLogics.Select(t => {
+                var r = fabricaRobot.ObtenerRobot(t);
+                r.Tablero = tablero;
+                return r;
+            }).ToArray();
+
+            this.robots = robots;
+
+            this.Tablero = this.tablero;
+            this.tablero.Filas.First().Casilleros.First().Robot = robots.First();
+            this.tablero.Filas.Last().Casilleros.Last().Robot = robots.Last();
+        }
+
         public void Iniciar(IList<Type> robotTypes)
         {
             this.tablero = fabricaTablero.Crear();

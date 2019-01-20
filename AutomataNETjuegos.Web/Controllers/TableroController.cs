@@ -1,12 +1,10 @@
-﻿using AutomataNETjuegos.Contratos.Entorno;
-using AutomataNETjuegos.Logica;
+﻿using AutomataNETjuegos.Logica;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using AutoMapper;
-using AutomataNETjuegos.Web.WebTools;
-using System;
-using System.Linq;
 using AutomataNETjuegos.Robots;
+using AutomataNETjuegos.Web.Models;
+using Tablero = AutomataNETjuegos.Contratos.Entorno.Tablero;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -28,6 +26,15 @@ namespace AutomataNETjuegos.Web.Controllers
         {
             //var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
             juego.Iniciar(new[] { typeof(RobotDefensivo), typeof(RobotDefensivo) });
+
+            return GetTableros();
+        }
+
+        [HttpPost("[action]")]
+        public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
+        {
+            //var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
+            juego.Iniciar(tableroRequest.LogicasRobot);
 
             return GetTableros();
         }
