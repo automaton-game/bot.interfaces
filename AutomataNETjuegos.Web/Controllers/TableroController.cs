@@ -14,17 +14,10 @@ namespace AutomataNETjuegos.Web.Controllers
     [ApiController]
     public class TableroController : Controller
     {
-        private readonly IServiceProvider serviceProvider;
-
-        public TableroController(IServiceProvider serviceProvider)
-        {
-            this.serviceProvider = serviceProvider;
-        }
-
         [HttpGet("[action]")]
         public IEnumerable<Models.Tablero> GetTablero()
         {
-            var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot(serviceProvider));
+            var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
             juego.Iniciar(new[] { typeof(RobotDefensivo), typeof(RobotDefensivo) });
 
             var config = new MapperConfiguration(cfg => {
