@@ -19,6 +19,8 @@ export class JuegoComponent implements OnInit {
   public logica1: string;
   public logica2: string;
 
+  public errores: string[];
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     
   }
@@ -35,7 +37,7 @@ export class JuegoComponent implements OnInit {
 
         this.tableros = result;
         this.actualizarTablero();
-      }, error => console.error(error));
+      }, error => this.errores = error.error.map(e => e.id + ": " + e.descripcion));
   }
 
   ngOnInit(): void {

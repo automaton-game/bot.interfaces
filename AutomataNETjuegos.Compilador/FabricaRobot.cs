@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
+using AutomataNETjuegos.Compilador.Excepciones;
 using AutomataNETjuegos.Contratos.Robots;
 using AutomataNETjuegos.Logica;
 using Microsoft.CodeAnalysis;
@@ -48,10 +49,8 @@ namespace AutomataNETjuegos.Compilador
                         diagnostic.IsWarningAsError ||
                         diagnostic.Severity == DiagnosticSeverity.Error);
 
-                    foreach (Diagnostic diagnostic in failures)
-                    {
-                        Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
-                    }
+                    var errores = failures.Select(diagnostic => new ErrorCompilacion { Id = diagnostic.Id, Descripcion = diagnostic.GetMessage() }).ToArray();
+                    throw new ExcepcionCompilacion { ErroresCompilacion = errores };
                 }
                 else
                 {

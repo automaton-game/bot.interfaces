@@ -5,6 +5,7 @@ using AutoMapper;
 using AutomataNETjuegos.Robots;
 using AutomataNETjuegos.Web.Models;
 using Tablero = AutomataNETjuegos.Contratos.Entorno.Tablero;
+using AutomataNETjuegos.Compilador.Excepciones;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -31,11 +32,18 @@ namespace AutomataNETjuegos.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
+        public ObjectResult GetTablero(TableroRequest tableroRequest)
         {
-            juego.Iniciar(tableroRequest.LogicasRobot);
+            try
+            {
+                juego.Iniciar(tableroRequest.LogicasRobot);
 
-            return GetTableros();
+                return Ok(GetTableros());
+            }
+            catch (ExcepcionCompilacion ex)
+            {
+                return this.Conflict(ex.ErroresCompilacion);
+            }
         }
 
         private IEnumerable<Models.Tablero> GetTableros()
