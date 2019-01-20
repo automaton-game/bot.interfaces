@@ -1,16 +1,29 @@
 <h1>Juego</h1>
 
-<div>
-  <div *ngFor="let fila of filas">
-    <juego-fila-component [datosFila]="fila"></juego-fila-component>
+<div *ngIf="!filas">
+  <div class="panel panel-default">
+    <div class="panel-heading"><label>Logica de robot 1</label></div>
+    <div class="panel-body">
+      <textarea [(ngModel)]="logica1" rows="10" style="width:100%;"></textarea>
+    </div>
+  </div>
+  <div class="well well-lg">
+    <button (click)="obtenerTablero()">Enviar</button>
   </div>
 </div>
 
-<div style="clear:both">
-  <fieldset>
-    <label>Turno:</label><input type="range" class="custom-range" id="customRange1" min="0" max="{{max}}" [(ngModel)]="actual" (change)="actualizarTablero()">
-    <p>Valor actual: <b>{{actual}}</b></p>
-  </fieldset>
-</div>
+  <div *ngIf="filas">
+    <div *ngFor="let fila of filas">
+      <juego-fila-component [datosFila]="fila"></juego-fila-component>
+    </div>
+    <div style="clear:both">
+      <fieldset>
+        <label>Turno:</label><input type="range" class="custom-range" id="customRange1" min="0" max="{{max}}" [(ngModel)]="actual" (change)="actualizarTablero()">
+        <p>Valor actual: <b>{{actual}}</b></p>
+      </fieldset>
+    </div>
+  </div>
+
+
 
 

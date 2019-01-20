@@ -5,7 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-juego-component',
-  templateUrl: './juego.component.html',  
+  templateUrl: './juego.component.html',
+  //styleUrls: ['./juego.component.css', '../../../node_modules/codemirror/lib/codemirror.css']
 })
 export class JuegoComponent implements OnInit {
 
@@ -15,12 +16,26 @@ export class JuegoComponent implements OnInit {
   public max: number;
   public actual: number;
 
+  public logica1: string;
+  public logica2: string;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     
   }
 
   actualizarTablero() {
     this.filas = this.tableros[this.actual].filas;
+  }
+
+  obtenerTablero() {
+    this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicasRobot: [this.logica1, this.logica2] })
+      .subscribe(result => {
+        this.max = result.length - 1;
+        this.actual = this.max;
+
+        this.tableros = result;
+        this.actualizarTablero();
+      }, error => console.error(error));
   }
 
   ngOnInit(): void {
@@ -93,14 +108,9 @@ export class JuegoComponent implements OnInit {
 
     `;
 
-    this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicasRobot: [logica, logica] })
-      .subscribe(result => {
-      this.max = result.length - 1;
-      this.actual = this.max;
-
-      this.tableros = result;
-      this.actualizarTablero();
-    }, error => console.error(error));
+    this.logica1 = logica;
+    this.logica2 = logica;
+    
   }
 
 }

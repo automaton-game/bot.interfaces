@@ -33,7 +33,7 @@ import { CeldaComponent } from './juego/celda/celda.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'juego', component: JuegoComponent },
-    ])
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
