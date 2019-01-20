@@ -14,29 +14,25 @@ namespace AutomataNETjuegos.Web.Controllers
     [ApiController]
     public class TableroController : Controller
     {
+        private readonly Juego2v2 juego;
+        private readonly IMapper mapper;
+
+        public TableroController(Juego2v2 juego, IMapper mapper)
+        {
+            this.juego = juego;
+            this.mapper = mapper;
+        }
+
         [HttpGet("[action]")]
         public IEnumerable<Models.Tablero> GetTablero()
         {
-            var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
+            //var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
             juego.Iniciar(new[] { typeof(RobotDefensivo), typeof(RobotDefensivo) });
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Tablero, Models.Tablero>();
-
-                cfg.CreateMap<FilaTablero, Models.FilaTablero>();
-
-                cfg.CreateMap<Casillero, Models.Casillero>()
-                    .ForMember(m => m.Muralla, y => y.MapFrom(m => m.Muralla != null ? (int?)m.Muralla.GetHashCode() : null))
-                    .ForMember(m => m.Robot, y => y.MapFrom(m => m.Robot != null ? (int?)m.Robot.GetHashCode() : null))
-                    ;
-            });
-
-            var mapper = config.CreateMapper();
-
-            return GetTableros(mapper, juego);
+            return GetTableros();
         }
 
-        private IEnumerable<Models.Tablero> GetTableros(IMapper mapper, IJuego2v2 juego)
+        private IEnumerable<Models.Tablero> GetTableros()
         {
             {
                 var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);

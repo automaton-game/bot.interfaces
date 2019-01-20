@@ -1,3 +1,7 @@
+using AutoMapper;
+using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Logica;
+using AutomataNETjuegos.Web.WebTools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +31,25 @@ namespace AutomataNETjuegos.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddTransient(p => {
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<Tablero, Models.Tablero>();
+
+                    cfg.CreateMap<FilaTablero, Models.FilaTablero>();
+
+                    cfg.CreateMap<Casillero, Models.Casillero>()
+                        .ForMember(m => m.Muralla, y => y.MapFrom(m => m.Muralla != null ? (int?)m.Muralla.GetHashCode() : null))
+                        .ForMember(m => m.Robot, y => y.MapFrom(m => m.Robot != null ? (int?)m.Robot.GetHashCode() : null))
+                        ;
+                });
+
+                var mapper = config.CreateMapper();
+                return mapper;
+            });
+
+            services.AddTransient<Juego2v2>();
+            services.AddTransient<IFabricaTablero, FabricaTablero>();
+            services.AddTransient<IFabricaRobot, FabricaRobot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
