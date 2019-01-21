@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
+using AutoMapper;
 using AutomataNETjuegos.Compilador.Excepciones;
 using AutomataNETjuegos.Contratos.Robots;
 using AutomataNETjuegos.Logica;
@@ -16,10 +17,14 @@ namespace AutomataNETjuegos.Compilador
     public class FabricaRobot : IFabricaRobot
     {
         private readonly ITempFileManager tempFileManager;
+        private readonly IMapper mapper;
 
-        public FabricaRobot(ITempFileManager tempFileManager)
+        public FabricaRobot(
+            ITempFileManager tempFileManager,
+            IMapper mapper)
         {
             this.tempFileManager = tempFileManager;
+            this.mapper = mapper;
         }
 
         public IRobot ObtenerRobot(Type tipo)
@@ -55,7 +60,7 @@ namespace AutomataNETjuegos.Compilador
                     diagnostic.IsWarningAsError ||
                     diagnostic.Severity == DiagnosticSeverity.Error);
 
-                var errores = failures.Select(diagnostic => new ErrorCompilacion { Id = diagnostic.Id, Descripcion = diagnostic.GetMessage() }).ToArray();
+                var errores = failures.Select(mapper.Map<Diagnostic, ErrorCompilacion>).ToArray();
                 throw new ExcepcionCompilacion { ErroresCompilacion = errores };
             }
             else

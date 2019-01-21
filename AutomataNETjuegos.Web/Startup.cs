@@ -1,5 +1,6 @@
 using AutoMapper;
 using AutomataNETjuegos.Compilador;
+using AutomataNETjuegos.Compilador.MappingProfiles;
 using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Logica;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.AzureAppServices;
 
 namespace AutomataNETjuegos.Web
 {
@@ -35,10 +35,10 @@ namespace AutomataNETjuegos.Web
 
             services.AddTransient(p => {
                 var config = new MapperConfiguration(cfg => {
+                    cfg.AddProfiles(typeof(ErrorCompilacionProfile));
+
                     cfg.CreateMap<Tablero, Models.Tablero>();
-
                     cfg.CreateMap<FilaTablero, Models.FilaTablero>();
-
                     cfg.CreateMap<Casillero, Models.Casillero>()
                         .ForMember(m => m.Muralla, y => y.MapFrom(m => m.Muralla != null ? (int?)m.Muralla.GetHashCode() : null))
                         .ForMember(m => m.Robot, y => y.MapFrom(m => m.Robot != null ? (int?)m.Robot.GetHashCode() : null))
