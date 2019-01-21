@@ -1,3 +1,4 @@
+using Moq;
 using System;
 using Xunit;
 
@@ -8,7 +9,8 @@ namespace AutomataNETjuegos.Compilador.Tests
         [Fact]
         public void FabricarRobotBase()
         {
-            var fabrica = new FabricaRobot();
+            var mock = new Mock<ITempFileManager>();
+            var fabrica = new FabricaRobot(mock.Object);
 
             var text = @"
                 using AutomataNETjuegos.Contratos.Entorno;
@@ -36,7 +38,8 @@ namespace AutomataNETjuegos.Compilador.Tests
         [Fact]
         public void FabricarRobotCompleto()
         {
-            var fabrica = new FabricaRobot();
+            var mock = new Mock<ITempFileManager>();
+            var fabrica = new FabricaRobot(mock.Object);
 
             var text = @"
                 using AutomataNETjuegos.Contratos.Entorno;
