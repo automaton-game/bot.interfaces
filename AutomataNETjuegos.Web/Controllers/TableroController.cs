@@ -6,6 +6,7 @@ using AutomataNETjuegos.Robots;
 using AutomataNETjuegos.Web.Models;
 using Tablero = AutomataNETjuegos.Contratos.Entorno.Tablero;
 using AutomataNETjuegos.Compilador.Excepciones;
+using Microsoft.Extensions.Logging;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -15,11 +16,13 @@ namespace AutomataNETjuegos.Web.Controllers
     {
         private readonly Juego2v2 juego;
         private readonly IMapper mapper;
+        private readonly ILogger logger;
 
-        public TableroController(Juego2v2 juego, IMapper mapper)
+        public TableroController(Juego2v2 juego, IMapper mapper, ILogger<TableroController> logger)
         {
             this.juego = juego;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         [HttpGet("[action]")]
@@ -42,6 +45,7 @@ namespace AutomataNETjuegos.Web.Controllers
             }
             catch (ExcepcionCompilacion ex)
             {
+                logger.LogInformation(ex, "Error de compilacion");
                 return this.Conflict(ex.ErroresCompilacion);
             }
         }
