@@ -37,7 +37,7 @@ export class JuegoComponent implements OnInit {
 
         this.tableros = result;
         this.actualizarTablero();
-      }, error => this.errores = error.error.map(e => e.id + ": " + e.descripcion));
+      }, ex => this.errores = ex.error.errors);
   }
 
   ngOnInit(): void {

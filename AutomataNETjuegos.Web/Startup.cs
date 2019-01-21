@@ -1,8 +1,8 @@
 using AutoMapper;
 using AutomataNETjuegos.Compilador;
-using AutomataNETjuegos.Compilador.MappingProfiles;
 using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Logica;
+using AutomataNETjuegos.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +35,6 @@ namespace AutomataNETjuegos.Web
 
             services.AddTransient(p => {
                 var config = new MapperConfiguration(cfg => {
-                    cfg.AddProfiles(typeof(ErrorCompilacionProfile));
 
                     cfg.CreateMap<Tablero, Models.Tablero>();
                     cfg.CreateMap<FilaTablero, Models.FilaTablero>();
@@ -70,6 +69,8 @@ namespace AutomataNETjuegos.Web
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseMvc(routes =>
             {

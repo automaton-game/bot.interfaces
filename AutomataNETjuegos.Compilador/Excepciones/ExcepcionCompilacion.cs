@@ -5,6 +5,11 @@ namespace AutomataNETjuegos.Compilador.Excepciones
 {
     public class ExcepcionCompilacion : Exception
     {
-        public IList<ErrorCompilacion> ErroresCompilacion { get; set; }
+        public ExcepcionCompilacion()
+        {
+            HResult = 23245688;
+        }
+
+        public IList<string> ErroresCompilacion { get; set; }
     }
 }

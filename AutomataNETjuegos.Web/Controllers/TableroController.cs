@@ -35,19 +35,10 @@ namespace AutomataNETjuegos.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public ObjectResult GetTablero(TableroRequest tableroRequest)
+        public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
         {
-            try
-            {
-                juego.Iniciar(tableroRequest.LogicasRobot);
-
-                return Ok(GetTableros());
-            }
-            catch (ExcepcionCompilacion ex)
-            {
-                logger.LogInformation(ex, "Error de compilacion");
-                return this.Conflict(ex.ErroresCompilacion);
-            }
+            juego.Iniciar(tableroRequest.LogicasRobot);
+            return GetTableros();
         }
 
         private IEnumerable<Models.Tablero> GetTableros()
