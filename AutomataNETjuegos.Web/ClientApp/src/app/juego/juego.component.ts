@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Tablero } from './modelos/tablero';
 import { FilaTablero } from './modelos/filaTablero';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-juego-component',
@@ -37,7 +37,8 @@ export class JuegoComponent implements OnInit {
 
         this.tableros = result;
         this.actualizarTablero();
-      }, ex => this.errores = ex.error.errors);
+        
+      }, (err: HttpErrorResponse) => this.errores = err.error.errors);
   }
 
   ngOnInit(): void {
@@ -114,5 +115,5 @@ export class JuegoComponent implements OnInit {
     this.logica2 = logica;
     
   }
-
+  
 }

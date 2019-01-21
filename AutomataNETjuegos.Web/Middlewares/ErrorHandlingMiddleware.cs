@@ -25,17 +25,17 @@ namespace AutomataNETjuegos.Web.Middlewares
             }
             catch (Exception ex)
             {
+                if (context.Request.ContentType != "application/json")
+                {
+                    throw ex;
+                }
+
                 await HandleExceptionAsync(context, ex);
             }
         }
 
         private async static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            if(context.Request.ContentType != "application/json")
-            {
-                return;
-            }
-
             context.Response.ContentType = "application/json";
 
             IList<string> errors = new List<string>() { ex.Message };
