@@ -53,18 +53,12 @@ namespace AutomataNETjuegos.Web
             services.AddTransient<IFabricaTablero, FabricaTablero>();
             services.AddTransient<IFabricaRobot, FabricaRobot>();
             services.AddScoped<ITempFileManager, TempFileManager>();
+            services.AddLogging(ConfigureLogging);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddAzureWebAppDiagnostics(
-              new AzureAppServicesDiagnosticsSettings
-              {
-                  OutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss zzz} [{Level}] {RequestId}-{SourceContext}: {Message}{NewLine}{Exception}"
-              }
-            );
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -96,6 +90,11 @@ namespace AutomataNETjuegos.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        public void ConfigureLogging(ILoggingBuilder loggingBuilder)
+        {
+            loggingBuilder.AddAzureWebAppDiagnostics();
         }
     }
 }
