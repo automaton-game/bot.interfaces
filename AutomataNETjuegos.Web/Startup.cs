@@ -2,6 +2,7 @@ using AutoMapper;
 using AutomataNETjuegos.Compilador;
 using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Logica;
+using AutomataNETjuegos.Web.MappingProfiles;
 using AutomataNETjuegos.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace AutomataNETjuegos.Web
 
             services.AddTransient(p => {
                 var config = new MapperConfiguration(cfg => {
-
+                    cfg.AddProfile<ErrorProfile>();
                     cfg.CreateMap<Tablero, Models.Tablero>();
                     cfg.CreateMap<FilaTablero, Models.FilaTablero>();
                     cfg.CreateMap<Casillero, Models.Casillero>()
