@@ -15,6 +15,13 @@ namespace AutomataNETjuegos.Compilador
 {
     public class FabricaRobot : IFabricaRobot
     {
+        private readonly ITempFileManager tempFileManager;
+
+        public FabricaRobot(ITempFileManager tempFileManager)
+        {
+            this.tempFileManager = tempFileManager;
+        }
+
         public IRobot ObtenerRobot(Type tipo)
         {
             return (IRobot)Activator.CreateInstance(tipo); ;
@@ -39,31 +46,25 @@ namespace AutomataNETjuegos.Compilador
                 references: references,
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-            using (var ms = new MemoryStream())
+            var tempFile = tempFileManager.Create();
+            var result = compilation.Emit(tempFile);
+
+            if (!result.Success)
             {
-                EmitResult result = compilation.Emit(ms);
+                IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                    diagnostic.IsWarningAsError ||
+                    diagnostic.Severity == DiagnosticSeverity.Error);
 
-                if (!result.Success)
-                {
-                    IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
-                        diagnostic.IsWarningAsError ||
-                        diagnostic.Severity == DiagnosticSeverity.Error);
-
-                    var errores = failures.Select(diagnostic => new ErrorCompilacion { Id = diagnostic.Id, Descripcion = diagnostic.GetMessage() }).ToArray();
-                    throw new ExcepcionCompilacion { ErroresCompilacion = errores };
-                }
-                else
-                {
-                    ms.Seek(0, SeekOrigin.Begin);
-
-                    var assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
-                    var type = assembly.ExportedTypes.FirstOrDefault(tipo =>
-                        tipo.IsClass && tipo.IsPublic && tipo.IsVisible && typeof(IRobot).IsAssignableFrom(tipo));
-                    return ObtenerRobot(type);
-                }
+                var errores = failures.Select(diagnostic => new ErrorCompilacion { Id = diagnostic.Id, Descripcion = diagnostic.GetMessage() }).ToArray();
+                throw new ExcepcionCompilacion { ErroresCompilacion = errores };
             }
-
-            return null;
+            else
+            {
+                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(tempFile);
+                var type = assembly.ExportedTypes.FirstOrDefault(tipo =>
+                    tipo.IsClass && tipo.IsPublic && tipo.IsVisible && typeof(IRobot).IsAssignableFrom(tipo));
+                return ObtenerRobot(type);
+            }
         }
     }
 }

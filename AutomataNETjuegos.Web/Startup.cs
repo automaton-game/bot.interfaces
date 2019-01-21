@@ -50,6 +50,7 @@ namespace AutomataNETjuegos.Web
             services.AddTransient<Juego2v2>();
             services.AddTransient<IFabricaTablero, FabricaTablero>();
             services.AddTransient<IFabricaRobot, FabricaRobot>();
+            services.AddScoped<ITempFileManager, TempFileManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
