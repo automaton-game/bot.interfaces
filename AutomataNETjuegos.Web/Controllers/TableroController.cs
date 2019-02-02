@@ -7,6 +7,7 @@ using AutomataNETjuegos.Web.Models;
 using Tablero = AutomataNETjuegos.Contratos.Entorno.Tablero;
 using AutomataNETjuegos.Compilador.Excepciones;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -28,8 +29,8 @@ namespace AutomataNETjuegos.Web.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Models.Tablero> GetTablero()
         {
-            //var juego = new Juego2v2(new FabricaTablero(), new FabricaRobot());
-            juego.Iniciar(new[] { typeof(RobotDefensivo), typeof(RobotDefensivo) });
+            juego.AgregarRobot(typeof(RobotDefensivo));
+            juego.AgregarRobot(typeof(RobotDefensivo));
 
             return GetTableros();
         }
@@ -37,7 +38,9 @@ namespace AutomataNETjuegos.Web.Controllers
         [HttpPost("[action]")]
         public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
         {
-            juego.Iniciar(tableroRequest.LogicasRobot);
+            juego.AgregarRobot(tableroRequest.LogicaRobot);
+            juego.AgregarRobot(typeof(RobotDefensivo));
+
             return GetTableros();
         }
 

@@ -15,7 +15,6 @@ namespace AutomataNETjuegos.Logica
 
         private IList<IRobot> robots;
         private IRobot robotJugado;
-        private Tablero tablero;
 
         public Juego2v2(
             IFabricaTablero fabricaTablero,
@@ -28,38 +27,54 @@ namespace AutomataNETjuegos.Logica
 
         public Tablero Tablero { get; private set; }
 
-        public void Iniciar(IList<string> robotLogics)
+        public void AgregarRobot(Type robotType)
         {
-            this.tablero = fabricaTablero.Crear();
-
-            var robots = robotLogics.Select(t => {
-                var r = fabricaRobot.ObtenerRobot(t);
-                r.Tablero = tablero;
-                return r;
-            }).ToArray();
-
-            this.robots = robots;
-
-            this.Tablero = this.tablero;
-            this.tablero.Filas.First().Casilleros.First().AgregarRobot(robots.First());
-            this.tablero.Filas.Last().Casilleros.Last().AgregarRobot(robots.Last());
+            var r = fabricaRobot.ObtenerRobot(robotType);
+            this.AgregarRobot(r);
         }
 
-        public void Iniciar(IList<Type> robotTypes)
+        public void AgregarRobot(string robotCode)
         {
-            this.tablero = fabricaTablero.Crear();
+            var r = fabricaRobot.ObtenerRobot(robotCode);
+            this.AgregarRobot(r);
+        }
 
-            var robots = robotTypes.Select(t => {
-                var r = fabricaRobot.ObtenerRobot(t);
-                r.Tablero = tablero;
-                return r;
-            }).ToArray();
+        private void AgregarRobot(IRobot robot)
+        {
+            if(this.robots != null)
+            {
+                this.robots = this.robots.Concat(new[] { robot }).ToArray();
+            }
+            else
+            {
+                this.robots = new[] { robot };
+            }
 
-            this.robots = robots;
+            if (this.Tablero == null)
+            {
+                this.Tablero = fabricaTablero.Crear();
+            }
 
-            this.Tablero = this.tablero;
-            this.tablero.Filas.First().Casilleros.First().AgregarRobot(robots.First());
-            this.tablero.Filas.Last().Casilleros.Last().AgregarRobot(robots.Last());
+            robot.Tablero = this.Tablero;
+
+            switch (this.robots.Count)
+            {
+                case 1:
+                    this.Tablero.Filas.First().Casilleros.First().AgregarRobot(robot);
+                    break;
+
+                case 2:
+                    this.Tablero.Filas.Last().Casilleros.Last().AgregarRobot(robot);
+                    break;
+
+                case 3:
+                    this.Tablero.Filas.Last().Casilleros.First().AgregarRobot(robot);
+                    break;
+
+                case 4:
+                    this.Tablero.Filas.First().Casilleros.Last().AgregarRobot(robot);
+                    break;
+            }
         }
 
         public bool JugarTurno()
@@ -107,12 +122,12 @@ namespace AutomataNETjuegos.Logica
 
         private Casillero ObtenerPosicion(IRobot robot)
         {
-            return this.tablero.GetPosition(robot);
+            return this.Tablero.GetPosition(robot);
         }
 
         private Casillero Desplazar(Casillero casilleroOrigen, DireccionEnum movimiento)
         {
-            var posFila = this.tablero.Filas.IndexOf(casilleroOrigen.Fila);
+            var posFila = this.Tablero.Filas.IndexOf(casilleroOrigen.Fila);
             var posColumna = casilleroOrigen.Fila.Casilleros.IndexOf(casilleroOrigen);
 
             switch (movimiento)
@@ -133,7 +148,7 @@ namespace AutomataNETjuegos.Logica
                     break;
             }
 
-            var fila = this.tablero.Filas.ElementAtOrDefault(posFila);
+            var fila = this.Tablero.Filas.ElementAtOrDefault(posFila);
             if (fila == null)
             {
                 throw new Exception("Movimiento fuera del tablero!");

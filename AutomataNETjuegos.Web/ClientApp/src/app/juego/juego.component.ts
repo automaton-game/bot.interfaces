@@ -30,7 +30,7 @@ export class JuegoComponent implements OnInit {
   }
 
   obtenerTablero() {
-    this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicasRobot: [this.logica1, this.logica2] })
+    this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicaRobot: this.logica1 })
       .subscribe(result => {
         this.max = result.length - 1;
         this.actual = this.max;

@@ -9,7 +9,9 @@ namespace AutomataNETjuegos.Logica
     {
         Tablero Tablero { get; }
 
-        void Iniciar(IList<Type> robotTypes);
+        void AgregarRobot(Type robotType);
+
+        void AgregarRobot(string robotCode);
 
         bool JugarTurno();
 
