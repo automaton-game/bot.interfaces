@@ -1,4 +1,5 @@
 ﻿using AutomataNETjuegos.Contratos.Robots;
+using System.Collections.Generic;
 
 namespace AutomataNETjuegos.Contratos.Entorno
 {
@@ -8,7 +9,7 @@ namespace AutomataNETjuegos.Contratos.Entorno
 
         public int NroColumna { get; set; }
 
-        public IRobot Robot { get; set; }
+        public IList<IRobot> Robots { get; set; }
 
         public IRobot Muralla { get; set; }
 

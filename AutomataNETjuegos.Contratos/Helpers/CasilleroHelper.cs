@@ -1,5 +1,6 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Contratos.Robots;
+using System.Linq;
 
 namespace AutomataNETjuegos.Contratos.Helpers
 {
@@ -54,6 +55,40 @@ namespace AutomataNETjuegos.Contratos.Helpers
             }
 
             return casillero.Fila.Tablero.GetPosition(x, y);
+        }
+
+        public static void AgregarRobot(this Casillero casillero, IRobot robot)
+        {
+            if (casillero.Robots == null)
+            {
+                casillero.Robots = new[] { robot };
+            } else
+            {
+                casillero.Robots.Add(robot);
+            }
+        }
+
+        public static IRobot ObtenerRobotLider(this Casillero casillero)
+        {
+            return casillero.Robots?.LastOrDefault();
+        }
+
+        public static void QuitarRobot(this Casillero casillero, IRobot robot)
+        {
+            if (casillero.Robots != null)
+            {
+                casillero.Robots = casillero.Robots.Except( new[] { robot }).ToArray();
+            }
+        }
+
+        public static bool ContieneRobot(this Casillero casillero, IRobot robot)
+        {
+            if (casillero.Robots != null)
+            {
+                return casillero.Robots.Contains(robot);
+            }
+
+            return false;
         }
     }
 }

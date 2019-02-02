@@ -41,8 +41,8 @@ namespace AutomataNETjuegos.Logica
             this.robots = robots;
 
             this.Tablero = this.tablero;
-            this.tablero.Filas.First().Casilleros.First().Robot = robots.First();
-            this.tablero.Filas.Last().Casilleros.Last().Robot = robots.Last();
+            this.tablero.Filas.First().Casilleros.First().AgregarRobot(robots.First());
+            this.tablero.Filas.Last().Casilleros.Last().AgregarRobot(robots.Last());
         }
 
         public void Iniciar(IList<Type> robotTypes)
@@ -58,8 +58,8 @@ namespace AutomataNETjuegos.Logica
             this.robots = robots;
 
             this.Tablero = this.tablero;
-            this.tablero.Filas.First().Casilleros.First().Robot = robots.First();
-            this.tablero.Filas.Last().Casilleros.Last().Robot = robots.Last();
+            this.tablero.Filas.First().Casilleros.First().AgregarRobot(robots.First());
+            this.tablero.Filas.Last().Casilleros.Last().AgregarRobot(robots.Last());
         }
 
         public bool JugarTurno()
@@ -78,8 +78,8 @@ namespace AutomataNETjuegos.Logica
                 var direccion = accionMover.Direccion;
                 var casilleroActual = ObtenerPosicion(robot);
                 var nuevoCasillero = Desplazar(casilleroActual, direccion);
-                nuevoCasillero.Robot = robot;
-                casilleroActual.Robot = null;
+                nuevoCasillero.AgregarRobot(robot);
+                casilleroActual.QuitarRobot(robot);
                 
             }
 
@@ -145,12 +145,12 @@ namespace AutomataNETjuegos.Logica
                 throw new Exception("Movimiento fuera del tablero!");
             }
 
-            if (casillero.Robot != null)
+            if (casillero.Robots != null)
             {
                 throw new Exception(string.Format("Hay un robot ocupando la posicion {0}, {1}", casillero.NroColumna, casillero.NroFila));
             }
 
-            if (casillero.Muralla != null && casillero.Muralla != casilleroOrigen.Robot)
+            if (casillero.Muralla != null && casillero.Muralla != casilleroOrigen.Robots)
             {
                 throw new Exception(string.Format("Hay una muralla ocupando la posicion {0}, {1}", casillero.NroColumna, casillero.NroFila));
             }

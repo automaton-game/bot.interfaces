@@ -8,12 +8,12 @@ namespace AutomataNETjuegos.Contratos.Helpers
     {
         public static Casillero GetPosition(this Tablero tablero, IRobot robot)
         {
-            return tablero.Filas.SelectMany(f => f.Casilleros).First(c => c.Robot == robot);
+            return tablero.Filas.SelectMany(f => f.Casilleros).First(c => c.ContieneRobot(robot));
         }
 
         public static Casillero GetPosition(this IRobot robot, Tablero tablero)
         {
-            return tablero.Filas.SelectMany(f => f.Casilleros).First(c => c.Robot == robot);
+            return tablero.Filas.SelectMany(f => f.Casilleros).First(c => c.ContieneRobot(robot));
         }
 
         public static Casillero GetPosition(this Tablero tablero, int x, int y)

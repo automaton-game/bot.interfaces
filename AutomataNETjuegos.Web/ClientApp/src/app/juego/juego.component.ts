@@ -43,71 +43,79 @@ export class JuegoComponent implements OnInit {
 
   ngOnInit(): void {
     const logica = `
-    using AutomataNETjuegos.Contratos.Entorno;
-    using AutomataNETjuegos.Contratos.Helpers;
-    using AutomataNETjuegos.Contratos.Robots;
-    using System;
-    using System.Collections.Generic;
+using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Helpers;
+using AutomataNETjuegos.Contratos.Robots;
+using System;
+using System.Collections.Generic;
 
-    namespace AutomataNETjuegos.Robots {
-      public class RobotDefensivo : IRobot
-      {
+namespace AutomataNETjuegos.Robots
+{
+    public class RobotDefensivo : IRobot
+    {
         public Tablero Tablero { get; set; }
 
         public AccionRobotDto GetAccionRobot()
-{
-  var casillero = this.GetPosition(Tablero);
+        {
+            var casillero = this.GetPosition(Tablero);
 
-  if (casillero.Muralla == null) {
-    return new AccionConstruirDto() { };
-  }
+            if (casillero.Muralla == null)
+            {
+                return new AccionConstruirDto() { };
+            }
 
-  var direcciones = new List<DireccionEnum>();
+            var direcciones = new List<DireccionEnum>();
 
-  var direccion = GenerarDireccionAleatoria(direcciones);
-  var movimiento = EvaluarMovimiento(casillero, direccion);
-  while (movimiento == null) {
-    direcciones.Add(direccion);
-    if (direcciones.Count >= 4) {
-      return null;
-    }
+            var direccion = GenerarDireccionAleatoria(direcciones);
+            var movimiento = EvaluarMovimiento(casillero, direccion);
+            while (movimiento == null)
+            {
+                direcciones.Add(direccion);
+                if (direcciones.Count >= 4)
+                {
+                    return null;
+                }
 
-    direccion = GenerarDireccionAleatoria(direcciones);
-    movimiento = EvaluarMovimiento(casillero, direccion);
-  }
+                direccion = GenerarDireccionAleatoria(direcciones);
+                movimiento = EvaluarMovimiento(casillero, direccion);
+            }
 
-  return movimiento;
-}
+            return movimiento;
+        }
 
         private AccionMoverDto EvaluarMovimiento(Casillero casillero, DireccionEnum direccion)
-{
-  var relativo = casillero.BuscarRelativo(direccion);
-  if (relativo != null) {
-    if (relativo.Muralla == null && relativo.Robot == null) {
-      return new AccionMoverDto() { Direccion = direccion };
-    }
-  }
+        {
+            var relativo = casillero.BuscarRelativo(direccion);
+            if (relativo != null)
+            {
+                if (relativo.Muralla == null && relativo.ObtenerRobotLider() == null)
+                {
+                    return new AccionMoverDto() { Direccion = direccion };
+                }
+            }
 
-  return null;
-}
+            return null;
+        }
 
         private DireccionEnum GenerarDireccionAleatoria()
-{
-  var random = new Random().Next(0, 4);
-  return (DireccionEnum)random;
-}
+        {
+            var random = new Random().Next(0,4);
+            return (DireccionEnum)random;
+        }
 
-        private DireccionEnum GenerarDireccionAleatoria(IList < DireccionEnum > evitar)
-{
-  var obtenido = GenerarDireccionAleatoria();
-  while (evitar.Contains(obtenido)) {
-    obtenido = GenerarDireccionAleatoria();
-  }
+        private DireccionEnum GenerarDireccionAleatoria(IList<DireccionEnum> evitar)
+        {
+            var obtenido = GenerarDireccionAleatoria();
+            while (evitar.Contains(obtenido))
+            {
+                obtenido = GenerarDireccionAleatoria();
+            }
 
-  return obtenido;
-}
+            return obtenido;
+        }
     }
 }
+
 
     `;
 

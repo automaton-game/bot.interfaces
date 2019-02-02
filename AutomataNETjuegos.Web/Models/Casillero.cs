@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace AutomataNETjuegos.Web.Models
 {
     public class Casillero
@@ -7,7 +9,9 @@ namespace AutomataNETjuegos.Web.Models
 
         public int NroColumna { get; set; }
 
-        public string Robot { get; set; }
+        public int Robots { get; set; }
+
+        public string RobotDuenio { get; set; }
 
         public string Muralla { get; set; }
     }

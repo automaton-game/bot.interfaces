@@ -5,8 +5,8 @@ namespace AutomataNETjuegos.Logica
 {
     public class FabricaTablero : IFabricaTablero
     {
-        private const int filas = 4;
-        private const int columnas = 4;
+        private const int filas = 5;
+        private const int columnas = 5;
 
         public Tablero Crear()
         {

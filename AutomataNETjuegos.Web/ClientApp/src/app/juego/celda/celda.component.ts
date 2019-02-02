@@ -10,7 +10,7 @@ export class CeldaComponent {
   @Input() casillero: Casillero;
 
   public getColor(hashId: string) {
-    var hashId = this.casillero.muralla || this.casillero.robot;
+    var hashId = this.casillero.muralla || this.casillero.robotDuenio;
     if (hashId) {
       return "#" + this.intToRGB(this.hashCode(hashId));
     } else {

@@ -7,7 +7,9 @@ export class Casillero {
 
   public nroColumna: number;
 
-  public robot: string;
+  public robotDuenio: string;
+
+  public robots: number;
 
   public muralla: string;
 

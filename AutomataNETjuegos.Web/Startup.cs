@@ -1,6 +1,7 @@
 using AutoMapper;
 using AutomataNETjuegos.Compilador;
 using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Logica;
 using AutomataNETjuegos.Web.MappingProfiles;
 using AutomataNETjuegos.Web.Middlewares;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace AutomataNETjuegos.Web
 {
@@ -41,7 +43,8 @@ namespace AutomataNETjuegos.Web
                     cfg.CreateMap<FilaTablero, Models.FilaTablero>();
                     cfg.CreateMap<Casillero, Models.Casillero>()
                         .ForMember(m => m.Muralla, y => y.MapFrom(m => m.Muralla != null ? (int?)m.Muralla.GetHashCode() : null))
-                        .ForMember(m => m.Robot, y => y.MapFrom(m => m.Robot != null ? (int?)m.Robot.GetHashCode() : null))
+                        .ForMember(m => m.Robots, y => y.MapFrom(m => m.Robots != null ? m.Robots.Count : 0))
+                        .ForMember(m => m.RobotDuenio, y => y.MapFrom(m => m.ObtenerRobotLider() != null ? (int?)m.ObtenerRobotLider().GetHashCode() : null));
                         ;
                 });
 

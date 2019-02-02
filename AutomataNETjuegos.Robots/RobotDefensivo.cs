@@ -43,7 +43,7 @@ namespace AutomataNETjuegos.Robots
             var relativo = casillero.BuscarRelativo(direccion);
             if (relativo != null)
             {
-                if (relativo.Muralla == null && relativo.Robot == null)
+                if (relativo.Muralla == null && relativo.ObtenerRobotLider() == null)
                 {
                     return new AccionMoverDto() { Direccion = direccion };
                 }
