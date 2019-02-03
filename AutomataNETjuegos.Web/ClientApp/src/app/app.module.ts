@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { JuegoComponent } from './juego/juego.component';
 import { FilaComponent } from './juego/fila/fila.component';
 import { CeldaComponent } from './juego/celda/celda.component';
+import { TableroComponent } from './juego/tablero/tablero.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CeldaComponent } from './juego/celda/celda.component';
     JuegoComponent,
     FilaComponent,
     CeldaComponent,
+    TableroComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

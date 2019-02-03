@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Tablero } from './modelos/tablero';
-import { FilaTablero } from './modelos/filaTablero';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-juego-component',
@@ -10,11 +9,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 })
 export class JuegoComponent implements OnInit {
 
-  private tableros: Tablero[];
-
-  public filas: Array<FilaTablero>;
-  public max: number;
-  public actual: number;
+  public tableros: Tablero[];
 
   public logica1: string;
   public logica2: string;
@@ -25,19 +20,10 @@ export class JuegoComponent implements OnInit {
     
   }
 
-  actualizarTablero() {
-    this.filas = this.tableros[this.actual].filas;
-  }
-
   obtenerTablero() {
     this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicaRobot: this.logica1 })
       .subscribe(result => {
-        this.max = result.length - 1;
-        this.actual = this.max;
-
-        this.tableros = result;
-        this.actualizarTablero();
-        
+        this.tableros = result;       
       }, (err: HttpErrorResponse) => this.errores = err.error.errors.map(m => m.message));
   }
 

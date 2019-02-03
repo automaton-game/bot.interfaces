@@ -1,6 +1,6 @@
 <h1>Juego</h1>
 
-<div *ngIf="!filas">
+<div *ngIf="!tableros">
   <div *ngIf="errores" class="panel panel-danger">
     <div class="panel-heading">Se produjeron errores:</div>
     <div class="panel-body">
@@ -22,18 +22,10 @@
   </div>
 </div>
 
-<div *ngIf="filas">
-  <div *ngFor="let fila of filas">
-    <juego-fila-component [datosFila]="fila"></juego-fila-component>
-  </div>
-  <div style="clear:both">
-    <fieldset>
-      <label>Turno:</label><input type="range" class="custom-range" id="customRange1" min="0" max="{{max}}" [(ngModel)]="actual" (change)="actualizarTablero()">
-      <p>Valor actual: <b>{{actual}}</b></p>
-    </fieldset>
-  </div>
+<div *ngIf="tableros">
+  <tablero-component [tableros]="tableros"></tablero-component>
   <div class="well well-lg">
-    <button (click)="filas=null">Borrar</button>
+    <button (click)="tableros=null">Borrar</button>
   </div>
 </div>
 
