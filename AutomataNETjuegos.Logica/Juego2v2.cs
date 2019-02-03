@@ -13,8 +13,9 @@ namespace AutomataNETjuegos.Logica
         private readonly IFabricaTablero fabricaTablero;
         private readonly IFabricaRobot fabricaRobot;
 
-        private IList<IRobot> robots;
+        private ICollection<IRobot> robots => accionesRobot.Keys;
         private IRobot robotJugado;
+        private IDictionary<IRobot, List<AccionRobotDto>> accionesRobot;
 
         public Juego2v2(
             IFabricaTablero fabricaTablero,
@@ -23,6 +24,8 @@ namespace AutomataNETjuegos.Logica
         {
             this.fabricaTablero = fabricaTablero;
             this.fabricaRobot = fabricaRobot;
+
+            this.accionesRobot = new Dictionary<IRobot, List<AccionRobotDto>>();
         }
 
         public Tablero Tablero { get; private set; }
@@ -41,14 +44,7 @@ namespace AutomataNETjuegos.Logica
 
         private void AgregarRobot(IRobot robot)
         {
-            if(this.robots != null)
-            {
-                this.robots = this.robots.Concat(new[] { robot }).ToArray();
-            }
-            else
-            {
-                this.robots = new[] { robot };
-            }
+            this.accionesRobot.Add(robot, new List<AccionRobotDto>());
 
             if (this.Tablero == null)
             {
@@ -87,6 +83,15 @@ namespace AutomataNETjuegos.Logica
                 return false;
             }
 
+            this.accionesRobot[robot].Add(accion);
+
+            // Valido que haya construido dentro de las ultimas aciones
+            var movimientosSinConstruccion = this.accionesRobot[robot].Reverse<AccionRobotDto>().TakeWhile(a => a is AccionMoverDto).Count();
+            if(movimientosSinConstruccion > Tablero.Filas.Count * 2)
+            {
+                return false;
+            }
+
             var accionMover = accion as AccionMoverDto;
             if (accionMover != null)
             {
@@ -117,7 +122,7 @@ namespace AutomataNETjuegos.Logica
 
         public IRobot ObtenerRobotTurnoActual()
         {
-            return robots.FirstOrDefault(f => f != robotJugado);
+            return this.accionesRobot.OrderBy(d => d.Value.Count).Select(d => d.Key).First();
         }
 
         private Casillero ObtenerPosicion(IRobot robot)
