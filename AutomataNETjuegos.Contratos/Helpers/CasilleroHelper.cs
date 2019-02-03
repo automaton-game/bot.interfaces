@@ -64,7 +64,7 @@ namespace AutomataNETjuegos.Contratos.Helpers
                 casillero.Robots = new[] { robot };
             } else
             {
-                casillero.Robots.Add(robot);
+                casillero.Robots = casillero.Robots.Concat( new[] { robot } ).ToArray();
             }
         }
 

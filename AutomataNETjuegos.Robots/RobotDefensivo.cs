@@ -13,8 +13,7 @@ namespace AutomataNETjuegos.Robots
         public AccionRobotDto GetAccionRobot()
         {
             var casillero = this.GetPosition(Tablero);
-
-            if (casillero.Muralla == null)
+            if (casillero.Muralla == null && casillero.Robots.Count == 1)
             {
                 return new AccionConstruirDto() { };
             }
@@ -43,7 +42,7 @@ namespace AutomataNETjuegos.Robots
             var relativo = casillero.BuscarRelativo(direccion);
             if (relativo != null)
             {
-                if (relativo.Muralla == null && relativo.ObtenerRobotLider() == null)
+                if (relativo.Muralla == null || relativo.Muralla == this)
                 {
                     return new AccionMoverDto() { Direccion = direccion };
                 }

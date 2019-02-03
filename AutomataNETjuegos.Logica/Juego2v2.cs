@@ -97,7 +97,7 @@ namespace AutomataNETjuegos.Logica
             {
                 var direccion = accionMover.Direccion;
                 var casilleroActual = ObtenerPosicion(robot);
-                var nuevoCasillero = Desplazar(casilleroActual, direccion);
+                var nuevoCasillero = Desplazar(casilleroActual, direccion, robot);
                 nuevoCasillero.AgregarRobot(robot);
                 casilleroActual.QuitarRobot(robot);
                 
@@ -107,6 +107,11 @@ namespace AutomataNETjuegos.Logica
             if (accionMurralla != null)
             {
                 var casilleroActual = ObtenerPosicion(robot);
+                if(casilleroActual.Robots.Count != 1)
+                {
+                    throw new Exception("No es posible construir cuando hay más de un robot en el mismo casillero.");
+                }
+
                 casilleroActual.Muralla = robot;
             }
 
@@ -130,7 +135,7 @@ namespace AutomataNETjuegos.Logica
             return this.Tablero.GetPosition(robot);
         }
 
-        private Casillero Desplazar(Casillero casilleroOrigen, DireccionEnum movimiento)
+        private Casillero Desplazar(Casillero casilleroOrigen, DireccionEnum movimiento, IRobot robot)
         {
             var posFila = this.Tablero.Filas.IndexOf(casilleroOrigen.Fila);
             var posColumna = casilleroOrigen.Fila.Casilleros.IndexOf(casilleroOrigen);
@@ -165,12 +170,7 @@ namespace AutomataNETjuegos.Logica
                 throw new Exception("Movimiento fuera del tablero!");
             }
 
-            if (casillero.Robots != null)
-            {
-                throw new Exception(string.Format("Hay un robot ocupando la posicion {0}, {1}", casillero.NroColumna, casillero.NroFila));
-            }
-
-            if (casillero.Muralla != null && casillero.Muralla != casilleroOrigen.Robots)
+            if (casillero.Muralla != null && casillero.Muralla != robot)
             {
                 throw new Exception(string.Format("Hay una muralla ocupando la posicion {0}, {1}", casillero.NroColumna, casillero.NroFila));
             }
