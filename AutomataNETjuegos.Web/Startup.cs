@@ -3,6 +3,7 @@ using AutomataNETjuegos.Compilador;
 using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Logica;
+using AutomataNETjuegos.Web.Logica;
 using AutomataNETjuegos.Web.MappingProfiles;
 using AutomataNETjuegos.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -52,11 +53,13 @@ namespace AutomataNETjuegos.Web
                 return mapper;
             });
 
-            services.AddTransient<Juego2v2>();
+            services.AddTransient<IJuego2v2, Juego2v2>();
             services.AddTransient<IFabricaTablero, FabricaTablero>();
             services.AddTransient<IFabricaRobot, FabricaRobot>();
             services.AddScoped<ITempFileManager, TempFileManager>();
             services.AddLogging(ConfigureLogging);
+
+            services.AddSingleton<IRegistroRobots, RegistroRobots>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

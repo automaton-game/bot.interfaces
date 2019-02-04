@@ -39,7 +39,7 @@ namespace AutomataNETjuegos.Logica
         {
             try
             {
-                var resultado = this.juego.JugarTurno();
+                var resultado = this.juego.JugarTurno() == null;
                 plataformaVisual.Dibujar(this.juego.Tablero);
                 return resultado;
             }

@@ -30,6 +30,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\juego\modelos\casillero.ts" />
     <None Remove="ClientApp\src\app\juego\modelos\filaTablero.ts" />
+    <None Remove="ClientApp\src\app\juego\modelos\juegoResponse.ts" />
     <None Remove="ClientApp\src\app\juego\modelos\robot.ts" />
     <None Remove="ClientApp\src\app\juego\modelos\tablero.ts" />
   </ItemGroup>
@@ -44,6 +45,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\casillero.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\filaTablero.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\juegoResponse.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\tablero.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\juego\modelos\robot.ts" />
   </ItemGroup>

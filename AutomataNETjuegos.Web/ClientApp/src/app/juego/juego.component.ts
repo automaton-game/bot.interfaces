@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Tablero } from './modelos/tablero';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { JuegoResponse } from './modelos/juegoResponse';
 
 @Component({
   selector: 'app-juego-component',
@@ -9,10 +10,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 })
 export class JuegoComponent implements OnInit {
 
-  public tableros: Tablero[];
+  public juegoResponse: JuegoResponse;
 
   public logica1: string;
-  public logica2: string;
+  public ganador: string;
 
   public errores: string[];
 
@@ -21,9 +22,9 @@ export class JuegoComponent implements OnInit {
   }
 
   obtenerTablero() {
-    this.http.post<Array<Tablero>>(this.baseUrl + 'api/Tablero/GetTablero', { logicaRobot: this.logica1 })
+    this.http.post<JuegoResponse>(this.baseUrl + 'api/Tablero/GetTablero', { logicaRobot: this.logica1 })
       .subscribe(result => {
-        this.tableros = result;       
+        this.juegoResponse = result;
       }, (err: HttpErrorResponse) => this.errores = err.error.errors.map(m => m.message));
   }
 
@@ -37,7 +38,7 @@ using System.Collections.Generic;
 
 namespace AutomataNETjuegos.Robots
 {
-    public class RobotDefensivo : IRobot
+    public class RobotUsuario : IRobot
     {
         public Tablero Tablero { get; set; }
 
@@ -104,8 +105,5 @@ namespace AutomataNETjuegos.Robots
     `;
 
     this.logica1 = logica;
-    this.logica2 = logica;
-    
   }
-  
 }

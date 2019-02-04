@@ -8,6 +8,7 @@ using Tablero = AutomataNETjuegos.Contratos.Entorno.Tablero;
 using AutomataNETjuegos.Compilador.Excepciones;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using AutomataNETjuegos.Web.Logica;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -15,33 +16,57 @@ namespace AutomataNETjuegos.Web.Controllers
     [ApiController]
     public class TableroController : Controller
     {
-        private readonly Juego2v2 juego;
+        private readonly IJuego2v2 juego;
         private readonly IMapper mapper;
         private readonly ILogger logger;
+        private readonly IRegistroRobots registroRobots;
 
-        public TableroController(Juego2v2 juego, IMapper mapper, ILogger<TableroController> logger)
+        private string motivo;
+
+        public TableroController(
+            IJuego2v2 juego,
+            IMapper mapper,
+            ILogger<TableroController> logger,
+            IRegistroRobots registroRobots)
         {
             this.juego = juego;
             this.mapper = mapper;
             this.logger = logger;
+            this.registroRobots = registroRobots;
         }
 
         [HttpGet("[action]")]
         public IEnumerable<Models.Tablero> GetTablero()
         {
-            juego.AgregarRobot(typeof(RobotDefensivo));
-            juego.AgregarRobot(typeof(RobotDefensivo));
+            var jugador = typeof(RobotDefensivo);
+            juego.AgregarRobot(jugador);
+            juego.AgregarRobot(jugador);
 
             return GetTableros();
         }
 
         [HttpPost("[action]")]
-        public IEnumerable<Models.Tablero> GetTablero(TableroRequest tableroRequest)
+        public JuegoResponse GetTablero(TableroRequest tableroRequest)
         {
-            juego.AgregarRobot(tableroRequest.LogicaRobot);
-            juego.AgregarRobot(typeof(RobotDefensivo));
+            var tipo = juego.AgregarRobot(tableroRequest.LogicaRobot);
+            registroRobots.Registrar(tipo.Name, tableroRequest.LogicaRobot);
+            
+            var ultimoCampeon = registroRobots.ObtenerUltimoCampeon();
+            if (ultimoCampeon != null)
+            {
+                juego.AgregarRobot(ultimoCampeon);
+            }
+            else
+            {
+                var jugador = typeof(RobotDefensivo);
+                juego.AgregarRobot(jugador);
+            }
 
-            return GetTableros();
+            var tableros = GetTableros().ToArray();
+            var usuarioGanador = juego.ObtenerUsuarioGanador();
+            registroRobots.RegistrarVictoria(usuarioGanador);
+
+            return new JuegoResponse { Tableros = tableros, Ganador = usuarioGanador, MotivoDerrota = this.motivo };
         }
 
         private IEnumerable<Models.Tablero> GetTableros()
@@ -51,11 +76,18 @@ namespace AutomataNETjuegos.Web.Controllers
                 yield return tablero;
             }
             
-            while (juego.JugarTurno())
+            while (JugarTurno())
             {
                 var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
                 yield return tablero;
             }
+        }
+
+        private bool JugarTurno()
+        {
+            var motivo = juego.JugarTurno();
+            this.motivo = motivo;
+            return motivo == null;
         }
     }
 }

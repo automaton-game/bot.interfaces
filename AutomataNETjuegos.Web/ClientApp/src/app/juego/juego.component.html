@@ -1,6 +1,6 @@
 <h1>Juego</h1>
 
-<div *ngIf="!tableros">
+<div *ngIf="!juegoResponse">
   <div *ngIf="errores" class="panel panel-danger">
     <div class="panel-heading">Se produjeron errores:</div>
     <div class="panel-body">
@@ -8,9 +8,8 @@
         <li class="list-group-item" *ngFor="let error of errores">{{error}}</li>
       </ul>
     </div>
-    
-  </div>
 
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading"><label>Logica de robot 1</label></div>
     <div class="panel-body">
@@ -22,10 +21,10 @@
   </div>
 </div>
 
-<div *ngIf="tableros">
-  <tablero-component [tableros]="tableros"></tablero-component>
+<div *ngIf="juegoResponse">
+  <tablero-component [juegoResponse]="juegoResponse"></tablero-component>
   <div class="well well-lg">
-    <button (click)="tableros=null">Borrar</button>
+    <button (click)="juegoResponse=null">Borrar</button>
   </div>
 </div>
 

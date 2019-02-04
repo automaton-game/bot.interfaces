@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FilaTablero } from '../modelos/filaTablero';
 import { Tablero } from '../modelos/tablero';
+import { JuegoResponse } from '../modelos/juegoResponse';
 
 @Component({
   selector: 'tablero-component',
@@ -8,21 +9,25 @@ import { Tablero } from '../modelos/tablero';
   styleUrls: []
 })
 export class TableroComponent {
-  private _tableros: Tablero[];
+  private _juegoResponse: JuegoResponse;
 
   public filas: Array<FilaTablero>;
   public actual: number;
+  public ganador: string;
+  public motivo: string;
 
   @Input()
-  set tableros(tableros: Tablero[]) {
-    this._tableros = tableros;
-    this.actual = tableros.length - 1;
+  set juegoResponse(juegoResponse: JuegoResponse) {
+    this._juegoResponse = juegoResponse;
+    this.actual = juegoResponse.tableros.length - 1;
+    this.ganador = juegoResponse.ganador;
+    this.motivo = juegoResponse.motivoDerrota;
     this.actualizarTablero();
   }
 
-  get tableros(): Tablero[] { return this._tableros; }
+  get juegoResponse(): JuegoResponse { return this._juegoResponse; }
 
   actualizarTablero() {
-    this.filas = this.tableros[this.actual].filas;
+    this.filas = this.juegoResponse.tableros[this.actual].filas;
   }
 }

@@ -1,6 +1,7 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
 using AutomataNETjuegos.Contratos.Helpers;
 using AutomataNETjuegos.Contratos.Robots;
+using AutomataNETjuegos.Logica.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,8 @@ namespace AutomataNETjuegos.Logica
         private readonly IFabricaTablero fabricaTablero;
         private readonly IFabricaRobot fabricaRobot;
 
-        private ICollection<IRobot> robots => accionesRobot.Keys;
-        private IRobot robotJugado;
-        private IDictionary<IRobot, List<AccionRobotDto>> accionesRobot;
+        private ICollection<IRobot> robots => accionesRobot.Select(s => s.Robot).ToArray();
+        private IList<RobotJuegoDto> accionesRobot = new List<RobotJuegoDto>();
 
         public Juego2v2(
             IFabricaTablero fabricaTablero,
@@ -24,8 +24,6 @@ namespace AutomataNETjuegos.Logica
         {
             this.fabricaTablero = fabricaTablero;
             this.fabricaRobot = fabricaRobot;
-
-            this.accionesRobot = new Dictionary<IRobot, List<AccionRobotDto>>();
         }
 
         public Tablero Tablero { get; private set; }
@@ -33,18 +31,20 @@ namespace AutomataNETjuegos.Logica
         public void AgregarRobot(Type robotType)
         {
             var r = fabricaRobot.ObtenerRobot(robotType);
-            this.AgregarRobot(r);
+            this.AgregarRobot(r.GetType().Name, r);
         }
 
-        public void AgregarRobot(string robotCode)
+        public Type AgregarRobot(string robotCode)
         {
             var r = fabricaRobot.ObtenerRobot(robotCode);
-            this.AgregarRobot(r);
+            var tipo = r.GetType();
+            this.AgregarRobot(tipo.Name, r);
+            return tipo;
         }
 
-        private void AgregarRobot(IRobot robot)
+        private void AgregarRobot(string usuario, IRobot robot)
         {
-            this.accionesRobot.Add(robot, new List<AccionRobotDto>());
+            this.accionesRobot.Add(new RobotJuegoDto { Usuario = usuario, Robot = robot });
 
             if (this.Tablero == null)
             {
@@ -73,23 +73,37 @@ namespace AutomataNETjuegos.Logica
             }
         }
 
-        public bool JugarTurno()
+        public string JugarTurno()
         {
-            var robot = ObtenerRobotTurnoActual();
+            var robotJuego = ObtenerRobotTurnoActual();
+            try
+            {
+                var accion = EjecutarAccionRobot(robotJuego);
+                this.accionesRobot.First(f => f.Robot == robotJuego.Robot).Acciones.Add(accion);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            
+            return null;
+        }
+
+        private AccionRobotDto EjecutarAccionRobot(RobotJuegoDto robotJuego)
+        {
+            var robot = robotJuego.Robot;
             var accion = robot.GetAccionRobot();
 
             if (accion == null)
             {
-                return false;
+                throw new Exception("El robot no devolvió ninguna accion");
             }
 
-            this.accionesRobot[robot].Add(accion);
-
             // Valido que haya construido dentro de las ultimas aciones
-            var movimientosSinConstruccion = this.accionesRobot[robot].Reverse<AccionRobotDto>().TakeWhile(a => a is AccionMoverDto).Count();
-            if(movimientosSinConstruccion > Tablero.Filas.Count * 2)
+            var movimientosSinConstruccion = robotJuego.Acciones.Reverse<AccionRobotDto>().TakeWhile(a => a is AccionMoverDto).Count();
+            if (movimientosSinConstruccion > Tablero.Filas.Count * 2)
             {
-                return false;
+                throw new Exception("Se excedió la cantidad maxima de movimientos sin construir");
             }
 
             var accionMover = accion as AccionMoverDto;
@@ -100,14 +114,14 @@ namespace AutomataNETjuegos.Logica
                 var nuevoCasillero = Desplazar(casilleroActual, direccion, robot);
                 nuevoCasillero.AgregarRobot(robot);
                 casilleroActual.QuitarRobot(robot);
-                
+
             }
 
             var accionMurralla = accion as AccionConstruirDto;
             if (accionMurralla != null)
             {
                 var casilleroActual = ObtenerPosicion(robot);
-                if(casilleroActual.Robots.Count != 1)
+                if (casilleroActual.Robots.Count != 1)
                 {
                     throw new Exception("No es posible construir cuando hay más de un robot en el mismo casillero.");
                 }
@@ -115,19 +129,12 @@ namespace AutomataNETjuegos.Logica
                 casilleroActual.Muralla = robot;
             }
 
-            robotJugado = robot;
-
-            return true;
+            return accion;
         }
 
-        public IEnumerable<IRobot> GetJugadores()
+        private RobotJuegoDto ObtenerRobotTurnoActual()
         {
-            return robots;
-        }
-
-        public IRobot ObtenerRobotTurnoActual()
-        {
-            return this.accionesRobot.OrderBy(d => d.Value.Count).Select(d => d.Key).First();
+            return this.accionesRobot.OrderBy(d => d.Acciones.Count).First();
         }
 
         private Casillero ObtenerPosicion(IRobot robot)
@@ -178,6 +185,10 @@ namespace AutomataNETjuegos.Logica
             return casillero;
         }
 
-        
+        public string ObtenerUsuarioGanador()
+        {
+            var perdedor = ObtenerRobotTurnoActual();
+            return this.accionesRobot.Except(new[] { perdedor }).First().Usuario;
+        }
     }
 }
