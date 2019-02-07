@@ -1,5 +1,8 @@
 ﻿using AutomataNETjuegos.Contratos.Entorno;
+using AutomataNETjuegos.Contratos.Robots;
+using AutomataNETjuegos.Logica.Dtos;
 using System;
+using System.Collections.Generic;
 
 namespace AutomataNETjuegos.Logica
 {
@@ -7,12 +10,18 @@ namespace AutomataNETjuegos.Logica
     {
         Tablero Tablero { get; }
 
+        ICollection<string> Robots { get; }
+
         void AgregarRobot(Type robotType);
 
         Type AgregarRobot(string robotCode);
 
+        void AgregarRobot(IRobot robot);
+
         string JugarTurno();
 
         string ObtenerUsuarioGanador();
+
+        RobotJuegoDto ObtenerRobotTurnoActual();
     }
 }

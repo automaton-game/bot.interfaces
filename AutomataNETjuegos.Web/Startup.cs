@@ -60,6 +60,7 @@ namespace AutomataNETjuegos.Web
             services.AddLogging(ConfigureLogging);
 
             services.AddSingleton<IRegistroRobots, RegistroRobots>();
+            services.AddSingleton<IRegistroJuegosManuales, RegistroJuegosManuales>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

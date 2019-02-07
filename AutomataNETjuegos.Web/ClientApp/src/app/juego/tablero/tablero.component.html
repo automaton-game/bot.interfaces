@@ -12,7 +12,7 @@
       <p>Valor actual: <b>{{actual}}</b></p>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div *ngIf="ganador" class="panel panel-default">
     <div class="panel-heading"><label>Ganador de la partida</label></div>
     <div class="panel-body">
       <input type="text" readonly [(ngModel)]="ganador" /><p>{{motivo}}</p>
