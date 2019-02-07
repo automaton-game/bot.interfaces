@@ -29,32 +29,35 @@
 </div>
 
 <div *ngIf="juegoManualResponse">
-  <div class="col-md-12">
-    <tablero-component class="col-md-6" [juegoResponse]="juegoManualResponse"></tablero-component>
-    <div class="col-md-6">
-      <div class="panel panel-default" *ngIf="idJugador == juegoManualResponse.jugadorTurnoActual">
-        <div class="panel-heading"><label>Nueva accion</label></div>
-        <div class="panel-body">
-          <button (click)="accionarTablero(0)">CONSTRUIR</button>
-          <button (click)="accionarTablero(1)">ARRIBA</button>
-          <button (click)="accionarTablero(2)">ABAJO</button>
-          <button (click)="accionarTablero(3)">IZQUIERDA</button>
-          <button (click)="accionarTablero(4)">DERECHA</button>
-        </div>
+  <div class="col-md-12" style="border: solid 1px black;">
+    <tablero-component [juegoResponse]="juegoManualResponse"></tablero-component>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default" *ngIf="idJugador == juegoManualResponse.jugadorTurnoActual">
+      <div class="panel-heading"><label>Nueva accion</label></div>
+      <div class="panel-body">
+        <button (click)="accionarTablero(0)">CONSTRUIR</button>
+        <button (click)="accionarTablero(1)">ARRIBA</button>
+        <button (click)="accionarTablero(2)">ABAJO</button>
+        <button (click)="accionarTablero(3)">IZQUIERDA</button>
+        <button (click)="accionarTablero(4)">DERECHA</button>
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading"><label>Jugador actual</label></div>
-        <div class="panel-body">
-          <div>
-            <select [(ngModel)]="idJugador" role="list" size="2">
-              <option *ngFor="let jugador of juegoManualResponse.jugadores; index as i;" value="{{jugador}}">Jugador {{i+1}}</option>
-            </select>
-          </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class=" panel panel-default">
+      <div class="panel-heading"><label>Jugador actual</label></div>
+      <div class="panel-body">
+        <div>
+          <select [(ngModel)]="idJugador" role="list" size="2">
+            <option *ngFor="let jugador of juegoManualResponse.jugadores; index as i;" value="{{jugador}}">Jugador {{i+1}}</option>
+          </select>
         </div>
       </div>
     </div>
-    
   </div>
+  
 </div>
 
 

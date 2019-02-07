@@ -1,11 +1,13 @@
-<div style="text-align:center;">
-  <div *ngFor="let fila of filas" style="width: auto;">
-    <juego-fila-component [datosFila]="fila"></juego-fila-component>
+<div class="col-md-6" style="text-align:center;">
+  <div style="margin: 15px; display: inline-block;">
+    <div *ngFor="let fila of filas" style="width: auto;">
+      <juego-fila-component [datosFila]="fila"></juego-fila-component>
+    </div>
+    <div style="clear: both;"></div>
   </div>
 </div>
-<div style="clear: both;"></div>
-<div style="margin:10px;">
-  <div class="panel panel-default">
+<div class="col-md-6">
+  <div class="panel panel-default ">
     <div class="panel-heading"><label>Visor de turnos</label></div>
     <div class="panel-body">
       <input type="range" class="custom-range" id="customRange1" min="0" max="{{juegoResponse.tableros.length - 1}}" [(ngModel)]="actual" (change)="actualizarTablero()">
@@ -19,4 +21,3 @@
     </div>
   </div>
 </div>
-
