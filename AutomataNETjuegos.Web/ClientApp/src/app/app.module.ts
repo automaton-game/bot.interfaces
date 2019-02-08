@@ -13,6 +13,7 @@ import { JuegoComponent } from './juego/juego.component';
 import { FilaComponent } from './juego/fila/fila.component';
 import { CeldaComponent } from './juego/celda/celda.component';
 import { TableroComponent } from './juego/tablero/tablero.component';
+import { JuegoManualComponent } from './juegoManual/juegoManual.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TableroComponent } from './juego/tablero/tablero.component';
     FilaComponent,
     CeldaComponent,
     TableroComponent,
+    JuegoManualComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,6 +37,7 @@ import { TableroComponent } from './juego/tablero/tablero.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'juego', component: JuegoComponent },
+      { path: 'juegoManual', component: JuegoManualComponent },
     ]),
   ],
   providers: [],

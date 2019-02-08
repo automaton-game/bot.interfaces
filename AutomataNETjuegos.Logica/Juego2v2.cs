@@ -5,7 +5,6 @@ using AutomataNETjuegos.Logica.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AutomataNETjuegos.Logica
 {
@@ -26,6 +25,8 @@ namespace AutomataNETjuegos.Logica
             this.fabricaRobot = fabricaRobot;
         }
 
+        public ICollection<string> Robots => accionesRobot.Select(r => r.Usuario).ToArray();
+
         public Tablero Tablero { get; private set; }
 
         public void AgregarRobot(Type robotType)
@@ -40,6 +41,12 @@ namespace AutomataNETjuegos.Logica
             var tipo = r.GetType();
             this.AgregarRobot(tipo.Name, r);
             return tipo;
+        }
+
+        public void AgregarRobot(IRobot robot)
+        {
+            var hash = robot.GetHashCode().ToString();
+            this.AgregarRobot(hash, robot);
         }
 
         private void AgregarRobot(string usuario, IRobot robot)
@@ -89,6 +96,17 @@ namespace AutomataNETjuegos.Logica
             return null;
         }
 
+        public RobotJuegoDto ObtenerRobotTurnoActual()
+        {
+            return this.accionesRobot.OrderBy(d => d.Acciones.Count).First();
+        }
+
+        public string ObtenerUsuarioGanador()
+        {
+            var perdedor = ObtenerRobotTurnoActual();
+            return this.accionesRobot.Except(new[] { perdedor }).First().Usuario;
+        }
+
         private AccionRobotDto EjecutarAccionRobot(RobotJuegoDto robotJuego)
         {
             var robot = robotJuego.Robot;
@@ -132,10 +150,7 @@ namespace AutomataNETjuegos.Logica
             return accion;
         }
 
-        private RobotJuegoDto ObtenerRobotTurnoActual()
-        {
-            return this.accionesRobot.OrderBy(d => d.Acciones.Count).First();
-        }
+        
 
         private Casillero ObtenerPosicion(IRobot robot)
         {
@@ -185,10 +200,6 @@ namespace AutomataNETjuegos.Logica
             return casillero;
         }
 
-        public string ObtenerUsuarioGanador()
-        {
-            var perdedor = ObtenerRobotTurnoActual();
-            return this.accionesRobot.Except(new[] { perdedor }).First().Usuario;
-        }
+        
     }
 }

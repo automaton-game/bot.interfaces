@@ -9,6 +9,7 @@ using AutomataNETjuegos.Compilador.Excepciones;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using AutomataNETjuegos.Web.Logica;
+using AutomataNETjuegos.Contratos.Robots;
 
 namespace AutomataNETjuegos.Web.Controllers
 {
@@ -20,29 +21,87 @@ namespace AutomataNETjuegos.Web.Controllers
         private readonly IMapper mapper;
         private readonly ILogger logger;
         private readonly IRegistroRobots registroRobots;
-
+        private readonly IRegistroJuegosManuales registroJuegosManuales;
         private string motivo;
 
         public TableroController(
             IJuego2v2 juego,
             IMapper mapper,
             ILogger<TableroController> logger,
-            IRegistroRobots registroRobots)
+            IRegistroRobots registroRobots,
+            IRegistroJuegosManuales registroJuegosManuales)
         {
             this.juego = juego;
             this.mapper = mapper;
             this.logger = logger;
             this.registroRobots = registroRobots;
+            this.registroJuegosManuales = registroJuegosManuales;
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Models.Tablero> GetTablero()
+        public JuegoManualResponse CrearTablero()
         {
-            var jugador = typeof(RobotDefensivo);
-            juego.AgregarRobot(jugador);
-            juego.AgregarRobot(jugador);
+            juego.AgregarRobot(new RobotManual());
+            juego.AgregarRobot(new RobotManual());
 
-            return GetTableros();
+            var id = registroJuegosManuales.Guardar(juego);
+
+            var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
+            return new JuegoManualResponse { Jugadores = juego.Robots, jugadorTurnoActual = juego.ObtenerRobotTurnoActual().Usuario, Tableros = new[] { tablero }, idTablero = id };
+        }
+
+        [HttpGet("[action]")]
+        public JuegoManualResponse ObtenerTablero([FromQuery(Name = "idTablero")]string idTablero)
+        {
+            var juego = registroJuegosManuales.Obtener(idTablero);
+
+            var tableros = registroJuegosManuales.ObtenerTableros(idTablero);
+
+            return new JuegoManualResponse { Jugadores = juego.Robots, jugadorTurnoActual = juego.ObtenerRobotTurnoActual().Usuario, Tableros = tableros, idTablero = idTablero };
+        }
+
+        [HttpPost("[action]")]
+        public JuegoManualResponse AccionarTablero(JuegoManualRequest juegoManualRequest)
+        {
+            var juego = registroJuegosManuales.Obtener(juegoManualRequest.IdTablero);
+            var robot = juego.ObtenerRobotTurnoActual();
+            var jugador = robot.Robot as RobotManual;
+
+            if (robot.Usuario != juegoManualRequest.IdJugador)
+            {
+                throw new System.Exception("Jugador actual incorrecto");
+            }
+
+            switch (juegoManualRequest.AccionRobot)
+            {
+                case AccionRobot.Construir:
+                    jugador.AccionRobot = new AccionConstruirDto();
+                    break;
+                case AccionRobot.Arriba:
+                    jugador.AccionRobot = new AccionMoverDto { Direccion = DireccionEnum.Arriba };
+                    break;
+                case AccionRobot.Abajo:
+                    jugador.AccionRobot = new AccionMoverDto { Direccion = DireccionEnum.Abajo };
+                    break;
+                case AccionRobot.Izquierda:
+                    jugador.AccionRobot = new AccionMoverDto { Direccion = DireccionEnum.Izquierda };
+                    break;
+                case AccionRobot.Derecha:
+                    jugador.AccionRobot = new AccionMoverDto { Direccion = DireccionEnum.Derecha };
+                    break;
+            }
+
+            
+            string ganador = null;
+            if (!JugarTurno(juego))
+            {
+                ganador = juego.ObtenerUsuarioGanador();
+            }
+
+            var tableroModel = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
+            var tableros = registroJuegosManuales.GuardarTablero(juegoManualRequest.IdTablero, tableroModel);
+
+            return new JuegoManualResponse { Jugadores = juego.Robots, jugadorTurnoActual = juego.ObtenerRobotTurnoActual().Usuario, Tableros = tableros, idTablero = juegoManualRequest.IdTablero, Ganador = ganador, MotivoDerrota = motivo};
         }
 
         [HttpPost("[action]")]
@@ -62,28 +121,28 @@ namespace AutomataNETjuegos.Web.Controllers
                 juego.AgregarRobot(jugador);
             }
 
-            var tableros = GetTableros().ToArray();
+            var tableros = GetTableros(juego).ToArray();
             var usuarioGanador = juego.ObtenerUsuarioGanador();
             registroRobots.RegistrarVictoria(usuarioGanador);
 
             return new JuegoResponse { Tableros = tableros, Ganador = usuarioGanador, MotivoDerrota = this.motivo };
         }
 
-        private IEnumerable<Models.Tablero> GetTableros()
+        private IEnumerable<Models.Tablero> GetTableros(IJuego2v2 juego)
         {
             {
                 var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
                 yield return tablero;
             }
             
-            while (JugarTurno())
+            while (JugarTurno(juego))
             {
                 var tablero = mapper.Map<Tablero, Models.Tablero>(juego.Tablero);
                 yield return tablero;
             }
         }
 
-        private bool JugarTurno()
+        private bool JugarTurno(IJuego2v2 juego)
         {
             var motivo = juego.JugarTurno();
             this.motivo = motivo;

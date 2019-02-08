@@ -1,0 +1,65 @@
+<h1>Juego {{idTablero}}</h1>
+
+<div *ngIf="errores" class="panel panel-danger">
+  <div class="panel-heading">Se produjeron errores:</div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let error of errores">{{error}}</li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="!juegoManualResponse">
+  <div class="panel panel-default">
+    <div class="panel-heading"><label>Empezar nueva partida</label></div>
+    <div class="panel-body">
+      <button (click)="crearTablero()">Crear Tablero</button>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><label>Jugar partida</label></div>
+    <div class="panel-body">
+      <input type="text" [(ngModel)]="idTablero" placeholder="idTablero" />
+      <button (click)="obtenerTablero()">Buscar</button>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="juegoManualResponse">
+  <div class="col-md-12" style="border: solid 1px black;">
+    <tablero-component [juegoResponse]="juegoManualResponse"></tablero-component>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default" *ngIf="idJugador == juegoManualResponse.jugadorTurnoActual">
+      <div class="panel-heading"><label>Nueva accion</label></div>
+      <div class="panel-body">
+        <button (click)="accionarTablero(0)">CONSTRUIR</button>
+        <button (click)="accionarTablero(1)">ARRIBA</button>
+        <button (click)="accionarTablero(2)">ABAJO</button>
+        <button (click)="accionarTablero(3)">IZQUIERDA</button>
+        <button (click)="accionarTablero(4)">DERECHA</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class=" panel panel-default">
+      <div class="panel-heading"><label>Jugador actual</label></div>
+      <div class="panel-body">
+        <div>
+          <select [(ngModel)]="idJugador" (ngModelChange)="verificarTurnoJugadorActual()" size="2">
+            <option *ngFor="let jugador of juegoManualResponse.jugadores; index as i;" value="{{jugador}}">Jugador {{i+1}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+
