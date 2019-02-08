@@ -50,7 +50,7 @@
       <div class="panel-heading"><label>Jugador actual</label></div>
       <div class="panel-body">
         <div>
-          <select [(ngModel)]="idJugador" role="list" size="2">
+          <select [(ngModel)]="idJugador" (ngModelChange)="verificarTurnoJugadorActual()" size="2">
             <option *ngFor="let jugador of juegoManualResponse.jugadores; index as i;" value="{{jugador}}">Jugador {{i+1}}</option>
           </select>
         </div>
