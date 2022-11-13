@@ -1,4 +1,0 @@
-<div class="tablero-casillero" [class.tablero-casillero-ocupado]="casillero.muralla" [style.backgroundColor]="getColor(casillero.muralla || casillero.robotDuenio)">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Robot-icon.svg" *ngIf="casillero.robots == 1" />
-  <p *ngIf="casillero.robots > 1" style="font-size: large">{{casillero.robots}}</p>
-</div>
