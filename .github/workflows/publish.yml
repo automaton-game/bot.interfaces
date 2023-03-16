@@ -31,6 +31,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Push Nuget
-      run: dotnet nuget push automaton-game.bot.interfaces.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
+      run:
+        echo ${NUGET_API_KEY} 
+        dotnet nuget push automaton-game.bot.interfaces.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_API_KEY}
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_TOKEN }} 
