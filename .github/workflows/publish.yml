@@ -27,7 +27,7 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Debug /p:Version=${VERSION} --include-source --no-build --output .
     - name: Push GitHub
-      run: dotnet nuget push AutomataNETjuegos.Contratos.${VERSION}.nupkg --source https://nuget.pkg.github.com/hlavrencic/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push AutomataNETjuegos.Contratos.${VERSION}.nupkg --source https://nuget.pkg.github.com/automaton-game/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Push Nuget
