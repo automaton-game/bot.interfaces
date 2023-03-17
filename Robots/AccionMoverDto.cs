@@ -1,4 +1,4 @@
-﻿namespace AutomataNETjuegos.Contratos.Robots
+﻿namespace automatonGame.bot.interfaces.Robots
 {
     public class AccionMoverDto : AccionRobotDto
     {

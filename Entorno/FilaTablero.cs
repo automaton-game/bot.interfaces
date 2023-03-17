@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AutomataNETjuegos.Contratos.Entorno
+namespace automatonGame.bot.interfaces.Entorno
 {
     public class FilaTablero
     {

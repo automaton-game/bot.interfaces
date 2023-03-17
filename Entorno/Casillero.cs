@@ -1,7 +1,7 @@
-﻿using AutomataNETjuegos.Contratos.Robots;
+﻿using automatonGame.bot.interfaces.Robots;
 using System.Collections.Generic;
 
-namespace AutomataNETjuegos.Contratos.Entorno
+namespace automatonGame.bot.interfaces.Entorno
 {
     public class Casillero
     {

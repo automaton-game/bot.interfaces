@@ -1,8 +1,8 @@
-﻿using AutomataNETjuegos.Contratos.Entorno;
-using AutomataNETjuegos.Contratos.Robots;
+﻿using automatonGame.bot.interfaces.Entorno;
+using automatonGame.bot.interfaces.Robots;
 using System.Linq;
 
-namespace AutomataNETjuegos.Contratos.Helpers
+namespace automatonGame.bot.interfaces.Helpers
 {
     public static class CasilleroHelper
     {

@@ -1,6 +1,6 @@
-﻿using AutomataNETjuegos.Contratos.Entorno;
+﻿using automatonGame.bot.interfaces.Entorno;
 
-namespace AutomataNETjuegos.Contratos.Robots
+namespace automatonGame.bot.interfaces.Robots
 {
     public interface IRobot
     {

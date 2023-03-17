@@ -13,4 +13,4 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/core/aspnet as runit
 WORKDIR /app
 COPY --from=build /app/out .
-ENTRYPOINT ["dotnet", "AutomataNETjuegos.Contratos.dll"]
+ENTRYPOINT ["dotnet", "automatonGame.bot.interfaces.dll"]
